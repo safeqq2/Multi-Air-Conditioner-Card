@@ -95,8 +95,270 @@
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
-// ─── i18n ─────────────────────────────────────────────────────────────────────
 const AC_TRANSLATIONS = {
+  zh: {
+    lang: '中文', flag: 'cn',
+    cardTitle: '空调',
+    cardSub: '智能家居',
+    greet: function() {
+      var h = new Date().getHours();
+      if (h >= 6 && h < 11) return '早上好';
+      if (h >= 11 && h < 13) return '中午好';
+      if (h >= 13 && h < 18) return '下午好';
+      if (h >= 18 && h < 21) return '晚上好';
+      return '晚安';
+    },
+    tempLabel: '温度',
+    selectRoom: '选择房间',
+    modeLabel: '模式',
+    statusLabel: '状态',
+    statusOn: '运行中',
+    statusOff: '已关',
+    airGood: '空气质量良好',
+    outdoorLabel: '室外',
+    pressOn: '点击开启',
+    dustLabel: 'PM2.5',
+    fanLabel: '风速',
+    swingLabel: '风向',
+    allOff: '全部关闭',
+    allOffSub: '关闭所有空调',
+    tapOff: '点击关闭',
+    tapOn: '点击开启',
+    confirmOff: '⚠ 全部关闭？',
+    confirmSub: function(n) { return '将关闭 ' + n + ' 台空调'; },
+    cancel: '取消',
+    doOff: '⏻ 全部关闭',
+    overlayOn: '运行中',
+    overlayOff: '已关闭',
+    modes: { cool:'制冷', heat:'制热', dry:'除湿', fan_only:'送风', auto:'自动', off:'关闭' },
+    fans: ['自动','最低','低','中低','中','中高','高','最高','低/自动','高/自动','静音'],
+    swings: ['固定','上下','左右','摆风','位置1','位置2','位置3','位置4','位置5','位置6'],
+    comfort: { dry:'空气干燥', fan_only:'微风清爽', off:'已关闭' },
+    comfortTemp: function(t) {
+      t = Math.round(t);
+      if (t <= 19) return '有点冷，加件衣服';
+      if (t <= 23) return '温度舒适';
+      if (t <= 27) return '温度宜人';
+      if (t <= 31) return '有点热，开空调吧';
+      return '太热了！快开空调';
+    },
+    centralAcLabel: '🏢 中央空调',
+    centralAcDesc: '启用后配置风阀',
+    damperAdd: '+ 添加风阀',
+    damperRemove: '删除',
+    damperEntity: '风阀实体 (cover.*)',
+    damperName: '风阀名称',
+    damperLabel: '风量',
+    damperOpen: '开启',
+    damperClosed: '关闭',
+    timerBtn: '定时',
+    timerTitle: '⏰ 定时器',
+    timerOff: '⏹ 定时关闭',
+    timerOn: '▶ 定时开启',
+    timerMinPlaceholder: '输入分钟',
+    timerMinUnit: '分钟',
+    timerDelete: '删除定时',
+    timerConfirm: '确认',
+    edViewMode: '🖥 显示模式',
+    edViewModeFull: '完整模式',
+    edViewModeLite: '精简模式',
+    edPopupStyle: '✨ 弹窗样式',
+    edPopupNormal: '标准',
+    edPopupEffect: '特效',
+    edPopupWave: '波浪',
+    edPresetBar: '🎛 快捷栏',
+    edPresetBarDesc: '显示 Eco/Fav/Clean',
+    bgLabel: '渐变背景',
+    bgPresets: '预设',
+    colorLabel: '颜色',
+    accentColor: '强调色',
+    textColor: '文字颜色',
+    color1: '颜色1 (左上)',
+    color2: '颜色2 (右下)',
+    edLang: '语言',
+    edEntities: '实体',
+    edOwnerName: '👤 显示名称',
+    edDisplay: '👁 显示选项',
+    edShowGreet: '问候语',
+    edShowGreetDesc: '显示早晚问候',
+    edShowCool: '❄ 制冷',
+    edShowHeat: '🔥 制热',
+    edShowDry: '💧 除湿',
+    edShowFanOnly: '🌀 送风',
+    edShowAuto: '🔄 自动',
+    edShowFan: '风速控制',
+    edShowFanDesc: '显示风速调节',
+    edShowSwing: '风向控制',
+    edShowSwingDesc: '显示风向调节',
+    edShowPreset: '快捷栏',
+    edShowPresetDesc: '显示 Eco/Fav/Clean',
+    edShowStatus: '状态面板',
+    edShowStatusDesc: '显示状态和传感器',
+    edShowAllOff: '全部关闭按钮',
+    edShowAllOffDesc: '显示全部关闭按钮',
+    edShowTimer: '定时按钮',
+    edShowTimerDesc: '显示定时器',
+    edShowRoomEnv: '室内温湿度',
+    edShowRoomEnvDesc: '显示当前房间温湿度',
+    edShowSlFan: '💨 风速 (精简)',
+    edShowSlFanDesc: '精简模式显示风速',
+    edShowSlSwing: '🔄 风向 (精简)',
+    edShowSlSwingDesc: '精简模式显示风向',
+    edShowSlRoomPower: '⚡ 房间功率',
+    edShowSlRoomPowerDesc: '精简模式显示功耗',
+    edDialInvert: '🔄 交换温度环',
+    edDialInvertDesc: '设定温度外圈，室温内圈',
+    edPowerUnit: '⚡ 功率单位',
+    edPowerUnitKw: 'kW',
+    edPowerUnitW: 'W',
+    edTempUnit: '🌡 温度单位',
+    edTempUnitC: '°C 摄氏度',
+    edTempUnitF: '°F 华氏度',
+    edCoolAnimSpeed: '❄ 雪花动画间隔(秒)',
+    edCoolAnimSpeedDesc: '2–15秒',
+    edShowOutdoorTemp: '室外温度',
+    edShowHumidity: '湿度',
+    edShowPower: '功率 (kW)',
+    edRoomCountLabel: function(n) { return '🏠 房间数量 (' + n + ')'; },
+    edRoomsHeader: function(n) { return '❄ 空调 (' + n + ' 个房间)'; },
+    edRooms: '❄ 空调',
+    edSensors: '📡 环境传感器',
+    edColors: '颜色',
+    edBg: '背景',
+    edBgAlpha: '🔆 背景透明度',
+    edBgTransparent: '透明',
+    edBgSolid: '不透明',
+    edColorsAdvanced: '🎨 高级颜色',
+    edColorsDefault: '留空=默认，实时生效',
+    edColorsReset: '↩ 重置所有颜色',
+    edColorsSecHeader: '📌 标题栏',
+    edColorsDial: '🌡 温度表盘',
+    edColorsModeCtrl: '⚡ 模式和控件',
+    edColorsStatusRoom: '🏠 状态和房间',
+    edAcEntity: '❄ 空调实体 (climate.*)',
+    edAcName: '🏷 显示名称',
+    edAcIcon: '🎨 MDI 图标',
+    edAcImage: '🖼 房间图片 (URL)',
+    edRoomTempEntity: '🌡 室温传感器',
+    edRoomHumidityEntity: '💧 湿度传感器',
+    edRoomPowerEntity: '⚡ 功率传感器 (sensor.*)',
+    edPm25: '🌫 PM2.5',
+    edOutdoorTemp: '🌡 室外温度',
+    edHumidity: '💧 室外湿度',
+    edPower: '⚡ 功耗 (kW)',
+    rooms: ['客厅','卧室','餐厅','书房'],
+    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
+  },
+
+  en: {
+    lang: 'English', flag: 'gb',
+    cardTitle: 'Air Conditioning',
+    cardSub:   'Smart Home',
+    greet: function() {
+      var h = new Date().getHours();
+      if (h>=6  && h<11) return 'Good morning,';
+      if (h>=11 && h<13) return 'Good noon,';
+      if (h>=13 && h<18) return 'Good afternoon,';
+      if (h>=18 && h<21) return 'Good evening,';
+      return 'Good night,';
+    },
+    tempLabel: 'TEMPERATURE',
+    selectRoom: 'SELECT ROOM',
+    modeLabel: 'MODE',
+    statusLabel: 'STATUS',
+    statusOn: 'RUNNING', statusOff: 'OFF',
+    airGood: 'Air quality is good', outdoorLabel: 'Outdoor', pressOn: 'Press power to turn on',
+    dustLabel: 'Fine dust',
+    fanLabel: 'Fan speed', swingLabel: 'Airflow',
+    allOff: 'Turn all off', allOffSub: 'Tap to turn off all rooms',
+    tapOff: 'Tap to turn off', tapOn: 'Tap to turn on',
+    confirmOff: '⚠ Turn all off?', confirmSub: function(n) { return 'Will turn off ' + n + ' AC units at once'; },
+    cancel: 'Cancel', doOff: '⏻ Turn all off',
+    overlayOn: 'ON', overlayOff: 'OFF',
+    modes: { cool:'Cool', heat:'Heat', dry:'Dry', fan_only:'Fan', auto:'Auto', off:'Off' },
+    fans:   ['Auto','Min','Low','Low-Mid','Medium','High-Mid','High','Max','Low/Auto','High/Auto','Quiet'],
+    swings: ['Fixed','Up/Down','Left/Right','Both','Position 1','Position 2','Position 3','Position 4','Position 5','Position 6'],
+    comfort: { dry:'Dry and comfortable', fan_only:'Light fresh breeze', off:'Currently off' },
+    comfortTemp: function(t) {
+      t = Math.round(t);
+      if (t<=19) return 'Very cold, grab a jacket!';
+      if (t<=23) return 'Ideal temperature, relax';
+      if (t<=27) return 'Comfortable and pleasant';
+      if (t<=31) return 'A bit warm, cool down more';
+      return 'Too hot! Adjust the temperature';
+    },
+    timerBtn: 'Timer',
+    bgLabel: 'Gradient background',
+    centralAcLabel: '🏢 Central AC', centralAcDesc: 'Enable to configure air dampers',
+    damperAdd: '+ Add damper', damperRemove: 'Remove',
+    damperEntity: 'Damper entity (cover.*)', damperName: 'Damper name',
+    damperLabel: 'Airflow', damperOpen: 'Open', damperClosed: 'Closed',
+    timerTitle: '⏰ Timer',
+    timerOff: '⏹ Schedule off', timerOn: '▶ Schedule on',
+    timerMinPlaceholder: 'Enter minutes...', timerMinUnit: 'min',
+    timerDelete: 'Delete timer', timerConfirm: 'Confirm',
+    edViewMode: '🖥 Display mode',
+    edViewModeFull: 'Full — Complete view',
+    edViewModeLite: 'Lite — Compact view',
+    edPopupStyle: '✨ Popup style (Super Lite)',
+    edPopupNormal: 'Normal',
+    edPopupEffect: 'Effect',
+    edPopupWave: 'Wave',
+    edPresetBar: '🎛 Preset bar (Eco / Fav / Clean)',
+    edPresetBarDesc: 'Show Eco · Fav · Clean row', bgPresets: 'Preset',
+    colorLabel: 'Colors', accentColor: 'Accent color', textColor: 'Text color',
+    color1: 'Color 1 (top left)', color2: 'Color 2 (bottom right)',
+    edLang: 'Language',
+    edEntities: 'Entities',
+    edOwnerName: '👤 Display name (Smart Home)',
+    edDisplay: '👁 Display options',
+    edShowGreet: 'Greeting', edShowGreetDesc: 'Show morning/afternoon/evening greeting',
+    edShowCool: '❄ Cool mode', edShowHeat: '🔥 Heat mode',
+    edShowDry: '💧 Dry mode', edShowFanOnly: '🌀 Fan mode', edShowAuto: '🔄 Auto mode',
+    edShowFan: 'Fan speed', edShowFanDesc: 'Show fan speed control panel',
+    edShowSwing: 'Airflow', edShowSwingDesc: 'Show airflow direction panel',
+    edShowPreset: 'Eco/Fav/Clean bar', edShowPresetDesc: 'Show Eco · Fav · Clean row',
+    edShowStatus: 'Status panel', edShowStatusDesc: 'Show status & sensor block on the right',
+    edShowAllOff: 'Turn all off button', edShowAllOffDesc: 'Show the turn-all-off button',
+    edShowTimer: 'Timer button', edShowTimerDesc: 'Show the timer button',
+    edShowRoomEnv: 'Room Temp / Humidity', edShowRoomEnvDesc: 'Show selected room temp & humidity (Super Lite)',
+    edShowSlFan: '💨 Fan speed (Super Lite)', edShowSlFanDesc: 'Show fan button in Super Lite',
+    edShowSlSwing: '🔄 Airflow (Super Lite)', edShowSlSwingDesc: 'Show airflow button in Super Lite',
+    edShowSlRoomPower: '⚡ Room power (Super Lite)', edShowSlRoomPowerDesc: 'Show selected room power consumption',
+    edDialInvert: '🔄 Swap dial rings', edDialInvertDesc: 'Set-temp outer (haptic drag), room-temp inner — default',
+    edPowerUnit: '⚡ Power unit', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
+    edTempUnit: '🌡 Temperature unit', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
+    edCoolAnimSpeed: '❄ Snowflake repeat (seconds)', edCoolAnimSpeedDesc: 'Wait time between snowflake animations (2–15s)',
+    edShowOutdoorTemp: 'Outdoor temperature', edShowHumidity: 'Humidity', edShowPower: 'Power (kW)',
+    edRoomCountLabel: function(n) { return '🏠 Number of rooms (1–8, default 4)'; },
+    edRoomsHeader: function(n) { return '❄ Air Conditioners (' + n + ' rooms)'; },
+    edRooms: '❄ Air Conditioners',
+    edSensors: '📡 Environment Sensors',
+    edColors: 'Colors',
+    edBg: 'Background',
+    edBgAlpha: '🔆 Background opacity', edBgTransparent: 'Transparent', edBgSolid: 'Solid',
+    edColorsAdvanced: '🎨 Advanced colors',
+    edColorsDefault: 'Leave blank = use default color. Applied in real time.',
+    edColorsReset: '↩ Reset all colors to default',
+    edColorsSecHeader: '📌 Header & Greeting',
+    edColorsDial: '🌡 Temperature dial',
+    edColorsModeCtrl: '⚡ Modes & Controls',
+    edColorsStatusRoom: '🏠 Status & Room tabs',
+    edAcEntity: '❄ AC entity (climate.*)',
+    edRoomTempEntity: '🌡 Room temperature sensor (if AC has none)',
+    edRoomHumidityEntity: '💧 Room humidity sensor (if AC has none)',
+    edRoomPowerEntity: '⚡ Room power sensor (sensor.*)',
+    edAcName: '🏷 Display name',
+    edAcIcon: '🎨 MDI Icon (vd: mdi:sofa)',
+    edAcImage: '🖼 Ảnh phòng (URL)',
+    edPm25: '🌫 Fine dust PM2.5',
+    edOutdoorTemp: '🌡 Outdoor temperature',
+    edHumidity: '💧 Outdoor humidity',
+    edPower: '⚡ Power consumption (kW)',
+    rooms: ['Living room','Bedroom','Dining room','Office'],
+    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
+  },
+
   vi: {
     lang: 'Tiếng Việt', flag: 'vn',
     cardTitle: 'Điều Hòa Không Khí',
@@ -205,114 +467,7 @@ const AC_TRANSLATIONS = {
     rooms: ['Phòng khách','Phòng ngủ','Phòng ăn','Văn phòng'],
     roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
   },
-  en: {
-    lang: 'English', flag: 'gb',
-    cardTitle: 'Air Conditioning',
-    cardSub:   'Smart Home',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Good morning,';
-      if (h>=11 && h<13) return 'Good noon,';
-      if (h>=13 && h<18) return 'Good afternoon,';
-      if (h>=18 && h<21) return 'Good evening,';
-      return 'Good night,';
-    },
-    tempLabel: 'TEMPERATURE',
-    selectRoom: 'SELECT ROOM',
-    modeLabel: 'MODE',
-    statusLabel: 'STATUS',
-    statusOn: 'RUNNING', statusOff: 'OFF',
-    airGood: 'Air quality is good', outdoorLabel: 'Outdoor', pressOn: 'Press power to turn on',
-    dustLabel: 'Fine dust',
-    fanLabel: 'Fan speed', swingLabel: 'Airflow',
-    allOff: 'Turn all off', allOffSub: 'Tap to turn off all rooms',
-    tapOff: 'Tap to turn off', tapOn: 'Tap to turn on',
-    confirmOff: '⚠ Turn all off?', confirmSub: function(n) { return 'Will turn off ' + n + ' AC units at once'; },
-    cancel: 'Cancel', doOff: '⏻ Turn all off',
-    overlayOn: 'ON', overlayOff: 'OFF',
-    modes: { cool:'Cool', heat:'Heat', dry:'Dry', fan_only:'Fan', auto:'Auto', off:'Off' },
-    fans:   ['Auto','Min','Low','Low-Mid','Medium','High-Mid','High','Max','Low/Auto','High/Auto','Quiet'],
-    swings: ['Fixed','Up/Down','Left/Right','Both','Position 1','Position 2','Position 3','Position 4','Position 5','Position 6'],
-    comfort: { dry:'Dry and comfortable', fan_only:'Light fresh breeze', off:'Currently off' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Very cold, grab a jacket!';
-      if (t<=23) return 'Ideal temperature, relax';
-      if (t<=27) return 'Comfortable and pleasant';
-      if (t<=31) return 'A bit warm, cool down more';
-      return 'Too hot! Adjust the temperature';
-    },
-    timerBtn: 'Timer',
-    bgLabel: 'Gradient background',
-    centralAcLabel: '🏢 Central AC', centralAcDesc: 'Enable to configure air dampers',
-    damperAdd: '+ Add damper', damperRemove: 'Remove',
-    damperEntity: 'Damper entity (cover.*)', damperName: 'Damper name',
-    damperLabel: 'Airflow', damperOpen: 'Open', damperClosed: 'Closed',
-    timerTitle: '⏰ Timer',
-    timerOff: '⏹ Schedule off', timerOn: '▶ Schedule on',
-    timerMinPlaceholder: 'Enter minutes...', timerMinUnit: 'min',
-    timerDelete: 'Delete timer', timerConfirm: 'Confirm',
-    edViewMode: '🖥 Display mode',
-    edViewModeFull: 'Full — Complete view',
-    edViewModeLite: 'Lite — Compact view',
-    edPopupStyle: '✨ Popup style (Super Lite)',
-    edPopupNormal: 'Normal',
-    edPopupEffect: 'Effect',
-    edPopupWave: 'Wave',
-    edPresetBar: '🎛 Preset bar (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Show Eco · Fav · Clean row', bgPresets: 'Preset',
-    colorLabel: 'Colors', accentColor: 'Accent color', textColor: 'Text color',
-    color1: 'Color 1 (top left)', color2: 'Color 2 (bottom right)',
-    edLang: 'Language',
-    edEntities: 'Entities',
-    edOwnerName: '👤 Display name (Smart Home)',
-    edDisplay: '👁 Display options',
-    edShowGreet: 'Greeting', edShowGreetDesc: 'Show morning/afternoon/evening greeting',
-    edShowCool: '❄ Cool mode', edShowHeat: '🔥 Heat mode',
-    edShowDry: '💧 Dry mode', edShowFanOnly: '🌀 Fan mode', edShowAuto: '🔄 Auto mode',
-    edShowFan: 'Fan speed', edShowFanDesc: 'Show fan speed control panel',
-    edShowSwing: 'Airflow', edShowSwingDesc: 'Show airflow direction panel',
-    edShowPreset: 'Eco/Fav/Clean bar', edShowPresetDesc: 'Show Eco · Fav · Clean row',
-    edShowStatus: 'Status panel', edShowStatusDesc: 'Show status & sensor block on the right',
-    edShowAllOff: 'Turn all off button', edShowAllOffDesc: 'Show the turn-all-off button',
-    edShowTimer: 'Timer button', edShowTimerDesc: 'Show the timer button',
-    edShowRoomEnv: 'Room Temp / Humidity', edShowRoomEnvDesc: 'Show selected room temp & humidity (Super Lite)',
-    edShowSlFan: '💨 Fan speed (Super Lite)', edShowSlFanDesc: 'Show fan button in Super Lite',
-    edShowSlSwing: '🔄 Airflow (Super Lite)', edShowSlSwingDesc: 'Show airflow button in Super Lite',
-    edShowSlRoomPower: '⚡ Room power (Super Lite)', edShowSlRoomPowerDesc: 'Show selected room power consumption',
-    edDialInvert: '🔄 Swap dial rings', edDialInvertDesc: 'Set-temp outer (haptic drag), room-temp inner — default',
-    edPowerUnit: '⚡ Power unit', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Temperature unit', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Snowflake repeat (seconds)', edCoolAnimSpeedDesc: 'Wait time between snowflake animations (2–15s)',
-    edShowOutdoorTemp: 'Outdoor temperature', edShowHumidity: 'Humidity', edShowPower: 'Power (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Number of rooms (1–8, default 4)'; },
-    edRoomsHeader: function(n) { return '❄ Air Conditioners (' + n + ' rooms)'; },
-    edRooms: '❄ Air Conditioners',
-    edSensors: '📡 Environment Sensors',
-    edColors: 'Colors',
-    edBg: 'Background',
-    edBgAlpha: '🔆 Background opacity', edBgTransparent: 'Transparent', edBgSolid: 'Solid',
-    edColorsAdvanced: '🎨 Advanced colors',
-    edColorsDefault: 'Leave blank = use default color. Applied in real time.',
-    edColorsReset: '↩ Reset all colors to default',
-    edColorsSecHeader: '📌 Header & Greeting',
-    edColorsDial: '🌡 Temperature dial',
-    edColorsModeCtrl: '⚡ Modes & Controls',
-    edColorsStatusRoom: '🏠 Status & Room tabs',
-    edAcEntity: '❄ AC entity (climate.*)',
-    edAcName: '🏷 Display name',
-    edAcIcon: '🎨 MDI Icon (vd: mdi:sofa)',
-    edAcImage: '🖼 Ảnh phòng (URL)',
-    edRoomTempEntity: '🌡 Room temperature sensor (if AC has none)',
-    edRoomHumidityEntity: '💧 Room humidity sensor (if AC has none)',
-    edRoomPowerEntity: '⚡ Room power sensor (sensor.*)',
-    edPm25: '🌫 Fine dust PM2.5',
-    edOutdoorTemp: '🌡 Outdoor temperature',
-    edHumidity: '💧 Outdoor humidity',
-    edPower: '⚡ Power consumption (kW)',
-    rooms: ['Living room','Bedroom','Dining room','Office'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
+
   de: {
     lang: 'Deutsch', flag: 'de',
     cardTitle: 'Klimaanlage',
@@ -416,950 +571,10 @@ const AC_TRANSLATIONS = {
     edPower: '⚡ Stromverbrauch (kW)',
     rooms: ['Wohnzimmer','Schlafzimmer','Esszimmer','Büro'],
     roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  fr: {
-    lang: 'Français', flag: 'fr',
-    cardTitle: 'Climatisation',
-    cardSub:   'Maison Intelligente',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Bonjour,';
-      if (h>=11 && h<13) return 'Bonne journée,';
-      if (h>=13 && h<18) return 'Bon après-midi,';
-      if (h>=18 && h<21) return 'Bonsoir,';
-      return 'Bonne nuit,';
-    },
-    tempLabel: 'TEMPÉRATURE',
-    selectRoom: 'CHOISIR PIÈCE',
-    modeLabel: 'MODE',
-    statusLabel: 'STATUT',
-    statusOn: 'EN MARCHE', statusOff: 'ÉTEINT',
-    airGood: 'Qualité de l\'air bonne', outdoorLabel: 'Extérieur', pressOn: 'Appuyer pour allumer',
-    dustLabel: 'Particules fines',
-    fanLabel: 'Vitesse ventilateur', swingLabel: 'Direction d\'air',
-    allOff: 'Tout éteindre', allOffSub: 'Éteindre toutes les pièces',
-    tapOff: 'Appuyer pour éteindre', tapOn: 'Appuyer pour allumer',
-    confirmOff: '⚠ Tout éteindre?', confirmSub: function(n) { return 'Éteindra ' + n + ' climatiseurs à la fois'; },
-    cancel: 'Annuler', doOff: '⏻ Tout éteindre',
-    overlayOn: 'ALLUMÉ', overlayOff: 'ÉTEINT',
-    modes: { cool:'Refroidir', heat:'Chauffer', dry:'Déshumidifier', fan_only:'Ventilateur', auto:'Automatique', off:'Éteint' },
-    fans:   ['Auto','Min','Faible','Faible-Moyen','Moyen','Moyen-Élevé','Élevé','Max','Faible/Auto','Élevé/Auto','Silencieux'],
-    swings: ['Fixe','Haut/Bas','Gauche/Droite','Tous','Position 1','Position 2','Position 3','Position 4','Position 5','Position 6'],
-    comfort: { dry:'Air sec et confortable', fan_only:'Brise légère et fraîche', off:'Actuellement éteint' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Très froid, mettez une veste!';
-      if (t<=23) return 'Température idéale, détendez-vous';
-      if (t<=27) return 'Confortable et agréable';
-      if (t<=31) return 'Un peu chaud, refroidir davantage';
-      return 'Trop chaud! Ajustez la température';
-    },
-    timerBtn: 'Minuterie',
-    timerTitle: '⏰ Minuterie',
-    timerOff: '⏹ Programmer arrêt', timerOn: '▶ Programmer allumage',
-    timerMinPlaceholder: 'Entrer minutes...', timerMinUnit: 'min',
-    timerDelete: 'Supprimer minuterie', timerConfirm: 'Confirmer',
-    edViewMode: '🖥 Mode d\'affichage',
-    edViewModeFull: 'Full — Vue complète',
-    edViewModeLite: 'Lite — Vue compacte',
-    edPopupStyle: '✨ Style popup (Super Lite)',
-    edPopupNormal: 'Normal',
-    edPopupEffect: 'Effet',
-    edPopupWave: 'Vague',
-    edPresetBar: '🎛 Barre de préréglages (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Afficher la ligne Eco · Fav · Clean',
-    bgLabel: 'Dégradé de fond', bgPresets: 'Préréglage',
-    colorLabel: 'Couleurs', accentColor: 'Couleur d\'accent', textColor: 'Couleur du texte',
-    color1: 'Couleur 1 (haut gauche)', color2: 'Couleur 2 (bas droite)',
-    edLang: 'Langue',
-    edEntities: 'Entités',
-    edOwnerName: '👤 Nom affiché (Maison Intelligente)',
-    edDisplay: '👁 Options d\'affichage',
-    edShowGreet: 'Salutation', edShowGreetDesc: 'Afficher la salutation matin/soir',
-    edShowCool: '❄ Refroidir', edShowHeat: '🔥 Chauffer',
-    edShowDry: '💧 Déshumidifier', edShowFanOnly: '🌀 Ventilateur', edShowAuto: '🔄 Auto',
-    edShowFan: 'Vitesse ventilateur', edShowFanDesc: 'Afficher le panneau de vitesse',
-    edShowSwing: 'Direction d\'air', edShowSwingDesc: 'Afficher le panneau de direction',
-    edShowPreset: 'Barre Eco/Fav/Clean', edShowPresetDesc: 'Afficher la ligne Eco · Fav · Clean',
-    edShowStatus: 'Bloc de statut', edShowStatusDesc: 'Afficher le bloc statut & capteurs',
-    edShowAllOff: 'Bouton Tout éteindre', edShowAllOffDesc: 'Afficher le bouton tout éteindre',
-    edShowTimer: 'Bouton minuterie', edShowTimerDesc: 'Afficher le bouton minuterie',
-    edShowRoomEnv: 'Temp/Humidité pièce', edShowRoomEnvDesc: 'Afficher temp. & humidité de la pièce (Super Lite)',
-    edShowSlFan: '💨 Vitesse ventilateur (Super Lite)', edShowSlFanDesc: 'Afficher bouton ventilateur en Super Lite',
-    edShowSlSwing: '🔄 Direction air (Super Lite)', edShowSlSwingDesc: 'Afficher bouton direction en Super Lite',
-    edShowSlRoomPower: '⚡ Consommation pièce (Super Lite)', edShowSlRoomPowerDesc: 'Afficher la consommation de la pièce sélectionnée',
-    edDialInvert: '🔄 Inverser les anneaux', edDialInvertDesc: 'Consigne ext. (glisser), temp. pièce int. — défaut',
-    edPowerUnit: '⚡ Unité puissance', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Unité de température', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Répétition flocon (s)', edCoolAnimSpeedDesc: 'Délai entre les animations (2–15s)',
-    edShowOutdoorTemp: 'Température extérieure', edShowHumidity: 'Humidité', edShowPower: 'Puissance (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Nombre de pièces (1–8, défaut 4)'; },
-    edRoomsHeader: function(n) { return '❄ Climatiseurs (' + n + ' pièces)'; },
-    edRooms: '❄ Climatiseurs',
-    edSensors: '📡 Capteurs environnementaux',
-    edColors: 'Couleurs',
-    edBg: 'Arrière-plan',
-    edBgAlpha: '🔆 Opacité du fond', edBgTransparent: 'Transparent', edBgSolid: 'Opaque',
-    edColorsAdvanced: '🎨 Couleurs avancées',
-    edColorsDefault: 'Laisser vide = couleur par défaut. Appliqué en temps réel.',
-    edColorsReset: '↩ Réinitialiser toutes les couleurs',
-    edColorsSecHeader: '📌 En-tête & Salutation',
-    edColorsDial: '🌡 Cadran de température',
-    edColorsModeCtrl: '⚡ Modes & Contrôles',
-    edColorsStatusRoom: '🏠 Statut & Onglets pièces',
-    edAcEntity: '❄ Entité clim. (climate.*)',
-    edRoomTempEntity: '🌡 Capteur température pièce (si clim. n\'en a pas)',
-    edRoomHumidityEntity: '💧 Capteur humidité pièce (si clim. n\'en a pas)',
-    edRoomPowerEntity: '⚡ Capteur consommation pièce (sensor.*)',
-    edAcName: '🏷 Nom affiché',
-    edAcIcon: '🎨 Icône MDI (ex: mdi:sofa)',
-    edAcImage: '🖼 Photo pièce (URL)',
-    edPm25: '🌫 Particules fines PM2.5',
-    edOutdoorTemp: '🌡 Température extérieure',
-    edHumidity: '💧 Humidité extérieure',
-    edPower: '⚡ Consommation (kW)',
-    rooms: ['Salon','Chambre','Salle à manger','Bureau'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  nl: {
-    lang: 'Nederlands', flag: 'nl',
-    cardTitle: 'Airconditioning',
-    cardSub:   'Slim Huis',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Goedemorgen,';
-      if (h>=11 && h<13) return 'Goedemiddag,';
-      if (h>=13 && h<18) return 'Goedemiddag,';
-      if (h>=18 && h<21) return 'Goedenavond,';
-      return 'Goedenacht,';
-    },
-    tempLabel: 'TEMPERATUUR',
-    selectRoom: 'KAMER KIEZEN',
-    modeLabel: 'MODUS',
-    statusLabel: 'STATUS',
-    statusOn: 'ACTIEF', statusOff: 'UIT',
-    airGood: 'Luchtkwaliteit goed', outdoorLabel: 'Buiten', pressOn: 'Druk om in te schakelen',
-    dustLabel: 'Fijnstof',
-    fanLabel: 'Ventilatorsnelheid', swingLabel: 'Luchtrichting',
-    allOff: 'Alles uitschakelen', allOffSub: 'Alle kamers uitschakelen',
-    tapOff: 'Tik om uit te schakelen', tapOn: 'Tik om in te schakelen',
-    confirmOff: '⚠ Alles uitschakelen?', confirmSub: function(n) { return n + ' airconditioners tegelijk uitschakelen'; },
-    cancel: 'Annuleren', doOff: '⏻ Alles uit',
-    overlayOn: 'AAN', overlayOff: 'UIT',
-    modes: { cool:'Koelen', heat:'Verwarmen', dry:'Ontvochtigen', fan_only:'Ventilator', auto:'Automatisch', off:'Uit' },
-    fans:   ['Auto','Min','Laag','Laag-Medium','Medium','Medium-Hoog','Hoog','Max','Laag/Auto','Hoog/Auto','Stil'],
-    swings: ['Vast','Op/Neer','Links/Rechts','Alle','Positie 1','Positie 2','Positie 3','Positie 4','Positie 5','Positie 6'],
-    comfort: { dry:'Droge lucht', fan_only:'Lichte frisse bries', off:'Momenteel uit' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Erg koud, trek iets aan!';
-      if (t<=23) return 'Ideale temperatuur, ontspan';
-      if (t<=27) return 'Aangenaam en comfortabel';
-      if (t<=31) return 'Iets warm, meer koelen';
-      return 'Te heet! Temperatuur aanpassen';
-    },
-    timerBtn: 'Timer',
-    bgLabel: 'Verloopachtergrond',
-    timerTitle: '⏰ Timer',
-    timerOff: '⏹ Schema uit', timerOn: '▶ Schema aan',
-    timerMinPlaceholder: 'Minuten invoeren...', timerMinUnit: 'min',
-    timerDelete: 'Timer verwijderen', timerConfirm: 'Bevestigen',
-    edViewMode: '🖥 Weergavemodus',
-    edViewModeFull: 'Full — Volledige weergave',
-    edViewModeLite: 'Lite — Compacte weergave',
-    edPopupStyle: '✨ Popup-stijl (Super Lite)',
-    edPopupNormal: 'Normaal',
-    edPopupEffect: 'Effect',
-    edPopupWave: 'Golf',
-    edPresetBar: '🎛 Voorkeuzeknoppenbalk (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Eco · Fav · Clean-rij weergeven', bgPresets: 'Voorinstelling',
-    colorLabel: 'Kleuren', accentColor: 'Accentkleur', textColor: 'Tekstkleur',
-    color1: 'Kleur 1 (linksboven)', color2: 'Kleur 2 (rechtsonder)',
-    edLang: 'Taal',
-    edEntities: 'Entiteiten',
-    edOwnerName: '👤 Weergavenaam (Slim Huis)',
-    edDisplay: '👁 Weergaveopties',
-    edShowGreet: 'Begroeting', edShowGreetDesc: 'Ochtend-/avondgroet weergeven',
-    edShowCool: '❄ Koelen', edShowHeat: '🔥 Verwarmen',
-    edShowDry: '💧 Ontvochtigen', edShowFanOnly: '🌀 Ventilator', edShowAuto: '🔄 Auto',
-    edShowFan: 'Ventilatorsnelheid', edShowFanDesc: 'Ventilatorregeling weergeven',
-    edShowSwing: 'Luchtrichting', edShowSwingDesc: 'Luchtrichtingsregeling weergeven',
-    edShowPreset: 'Eco/Fav/Clean-balk', edShowPresetDesc: 'Eco · Fav · Clean-rij weergeven',
-    edShowStatus: 'Statusblok', edShowStatusDesc: 'Status- & sensorblok rechts weergeven',
-    edShowAllOff: 'Alles-uit-knop', edShowAllOffDesc: 'Alles-uitschakelknop weergeven',
-    edShowTimer: 'Timerknop', edShowTimerDesc: 'Timerknop weergeven',
-    edShowRoomEnv: 'Kamer Temp/Vochtigheid', edShowRoomEnvDesc: 'Kamertemp. & vochtigheid tonen (Super Lite)',
-    edShowSlFan: '💨 Ventilatorsnelheid (Super Lite)', edShowSlFanDesc: 'Ventilatorknop tonen in Super Lite',
-    edShowSlSwing: '🔄 Luchtrichting (Super Lite)', edShowSlSwingDesc: 'Luchtrichtingsknop tonen in Super Lite',
-    edShowSlRoomPower: '⚡ Kamerverbruik (Super Lite)', edShowSlRoomPowerDesc: 'Verbruik geselecteerde kamer tonen',
-    edDialInvert: '🔄 Ringen omwisselen', edDialInvertDesc: 'Ingestelde temp buiten (slepen), kamertemp binnen — standaard',
-    edPowerUnit: '⚡ Vermogenseenheid', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Temperatuureenheid', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Sneeuwvlok herhalen (s)', edCoolAnimSpeedDesc: 'Wachttijd tussen animaties (2–15s)',
-    edShowOutdoorTemp: 'Buitentemperatuur', edShowHumidity: 'Vochtigheid', edShowPower: 'Vermogen (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Aantal kamers (1–8, standaard 4)'; },
-    edRoomsHeader: function(n) { return '❄ Airconditioners (' + n + ' kamers)'; },
-    edRooms: '❄ Airconditioners',
-    edSensors: '📡 Omgevingssensoren',
-    edColors: 'Kleuren',
-    edBg: 'Achtergrond',
-    edBgAlpha: '🔆 Achtergrondtransparantie', edBgTransparent: 'Transparant', edBgSolid: 'Ondoorzichtig',
-    edColorsAdvanced: '🎨 Geavanceerde kleuren',
-    edColorsDefault: 'Leeg laten = standaardkleur. Direct toegepast.',
-    edColorsReset: '↩ Alle kleuren terugzetten',
-    edColorsSecHeader: '📌 Koptekst & Begroeting',
-    edColorsDial: '🌡 Temperatuurmeter',
-    edColorsModeCtrl: '⚡ Modi & Bediening',
-    edColorsStatusRoom: '🏠 Status & Kamer-tabs',
-    edAcEntity: '❄ AC-entiteit (climate.*)',
-    edRoomTempEntity: '🌡 Kamertemperatuursensor (als AC dit niet heeft)',
-    edRoomHumidityEntity: '💧 Kamerluchtvochtigheidssensor (als AC dit niet heeft)',
-    edRoomPowerEntity: '⚡ Kamer vermogenssensor (sensor.*)',
-    edAcName: '🏷 Weergavenaam',
-    edAcIcon: '🎨 MDI Icoon (bijv. mdi:sofa)',
-    edAcImage: '🖼 Kamerafoto (URL)',
-    edPm25: '🌫 Fijnstof PM2.5',
-    edOutdoorTemp: '🌡 Buitentemperatuur',
-    edHumidity: '💧 Buitenvochtigheid',
-    edPower: '⚡ Stroomverbruik (kW)',
-    rooms: ['Woonkamer','Slaapkamer','Eetkamer','Kantoor'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  pl: {
-    lang: 'Polski', flag: 'pl',
-    cardTitle: 'Klimatyzacja',
-    cardSub:   'Inteligentny Dom',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Dzień dobry,';
-      if (h>=11 && h<13) return 'Dobry dzień,';
-      if (h>=13 && h<18) return 'Dzień dobry,';
-      if (h>=18 && h<21) return 'Dobry wieczór,';
-      return 'Dobranoc,';
-    },
-    tempLabel: 'TEMPERATURA',
-    selectRoom: 'WYBIERZ POKÓJ',
-    modeLabel: 'TRYB',
-    statusLabel: 'STATUS',
-    statusOn: 'DZIAŁA', statusOff: 'WYŁ',
-    airGood: 'Jakość powietrza dobra', outdoorLabel: 'Outdoor', pressOn: 'Naciśnij aby włączyć',
-    dustLabel: 'Pył zawieszony',
-    fanLabel: 'Prędkość wentylatora', swingLabel: 'Kierunek przepływu',
-    allOff: 'Wyłącz wszystkie', allOffSub: 'Naciśnij aby wyłączyć wszystkie pokoje',
-    tapOff: 'Naciśnij aby wyłączyć', tapOn: 'Naciśnij aby włączyć',
-    confirmOff: '⚠ Wyłączyć wszystkie?', confirmSub: function(n) { return 'Wyłączy ' + n + ' klimatyzatorów naraz'; },
-    cancel: 'Anuluj', doOff: '⏻ Wyłącz wszystkie',
-    overlayOn: 'WŁ', overlayOff: 'WYŁ',
-    modes: { cool:'Chłodzenie', heat:'Ogrzewanie', dry:'Osuszanie', fan_only:'Wentylator', auto:'Auto', off:'Wyłącz' },
-    fans:   ['Auto','Min','Niski','Niski-Średni','Średni','Średni-Wysoki','Wysoki','Max','Niski/Auto','Wysoki/Auto','Cichy'],
-    swings: ['Stały','Góra/Dół','Lewo/Prawo','Wszystkie','Pozycja 1','Pozycja 2','Pozycja 3','Pozycja 4','Pozycja 5','Pozycja 6'],
-    comfort: { dry:'Suche powietrze', fan_only:'Lekka świeża bryza', off:'Aktualnie wyłączone' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Bardzo zimno, ubierz się!';
-      if (t<=23) return 'Idealna temperatura, zrelaksuj się';
-      if (t<=27) return 'Wygodnie i przyjemnie';
-      if (t<=31) return 'Trochę ciepło, więcej chłodzić';
-      return 'Zbyt gorąco! Dostosuj temperaturę';
-    },
-    timerBtn: 'Timer',
-    bgLabel: 'Tło gradientowe',
-    timerTitle: '⏰ Timer',
-    timerOff: '⏹ Zaplanuj wyłączenie', timerOn: '▶ Zaplanuj włączenie',
-    timerMinPlaceholder: 'Wprowadź minuty...', timerMinUnit: 'min',
-    timerDelete: 'Usuń timer', timerConfirm: 'Potwierdź',
-    edViewMode: '🖥 Tryb wyświetlania',
-    edViewModeFull: 'Full — Pełny widok',
-    edViewModeLite: 'Lite — Widok kompaktowy',
-    edPopupStyle: '✨ Styl okienka (Super Lite)',
-    edPopupNormal: 'Normalny',
-    edPopupEffect: 'Efekt',
-    edPopupWave: 'Fala',
-    edPresetBar: '🎛 Pasek presetu (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Pokaż wiersz Eco · Fav · Clean', bgPresets: 'Ustawienie wstępne',
-    colorLabel: 'Kolory', accentColor: 'Kolor akcentu', textColor: 'Kolor tekstu',
-    color1: 'Kolor 1 (lewy górny)', color2: 'Kolor 2 (prawy dolny)',
-    edLang: 'Język',
-    edEntities: 'Encje',
-    edOwnerName: '👤 Nazwa wyświetlana (Inteligentny Dom)',
-    edDisplay: '👁 Opcje wyświetlania',
-    edShowGreet: 'Powitanie', edShowGreetDesc: 'Pokaż powitanie rano/wieczorem',
-    edShowCool: '❄ Chłodzenie', edShowHeat: '🔥 Ogrzewanie',
-    edShowDry: '💧 Osuszanie', edShowFanOnly: '🌀 Wentylator', edShowAuto: '🔄 Auto',
-    edShowFan: 'Prędkość wentylatora', edShowFanDesc: 'Pokaż panel prędkości wentylatora',
-    edShowSwing: 'Kierunek przepływu', edShowSwingDesc: 'Pokaż panel kierunku przepływu',
-    edShowPreset: 'Pasek Eco/Fav/Clean', edShowPresetDesc: 'Pokaż wiersz Eco · Fav · Clean',
-    edShowStatus: 'Blok statusu', edShowStatusDesc: 'Pokaż blok statusu i czujników po prawej',
-    edShowAllOff: 'Przycisk wyłącz wszystkie', edShowAllOffDesc: 'Pokaż przycisk wyłącz wszystkie',
-    edShowTimer: 'Przycisk timera', edShowTimerDesc: 'Pokaż przycisk timera',
-    edShowRoomEnv: 'Temp/Wilgotność pokoju', edShowRoomEnvDesc: 'Pokaż temp. i wilgotność pokoju (Super Lite)',
-    edShowSlFan: '💨 Prędkość wentylatora (Super Lite)', edShowSlFanDesc: 'Pokaż przycisk wentylatora w Super Lite',
-    edShowSlSwing: '🔄 Kierunek powietrza (Super Lite)', edShowSlSwingDesc: 'Pokaż przycisk kierunku w Super Lite',
-    edShowSlRoomPower: '⚡ Moc pokoju (Super Lite)', edShowSlRoomPowerDesc: 'Pokaż zużycie wybranego pokoju',
-    edDialInvert: '🔄 Zamień pierścienie', edDialInvertDesc: 'Temp. ustaw. zewn. (przeciągnij), temp. pokoju wewnątrz — domyślne',
-    edPowerUnit: '⚡ Jednostka mocy', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Jednostka temperatury', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Powtarzanie płatka śniegu (s)', edCoolAnimSpeedDesc: 'Czas oczekiwania między animacjami (2–15s)',
-    edShowOutdoorTemp: 'Temperatura zewnętrzna', edShowHumidity: 'Wilgotność', edShowPower: 'Moc (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Liczba pokojów (1–8, domyślnie 4)'; },
-    edRoomsHeader: function(n) { return '❄ Klimatyzatory (' + n + ' pokoje)'; },
-    edRooms: '❄ Klimatyzatory',
-    edSensors: '📡 Czujniki środowiskowe',
-    edColors: 'Kolory',
-    edBg: 'Tło',
-    edBgAlpha: '🔆 Przezroczystość tła', edBgTransparent: 'Przezroczyste', edBgSolid: 'Nieprzezroczyste',
-    edColorsAdvanced: '🎨 Zaawansowane kolory',
-    edColorsDefault: 'Zostaw puste = kolor domyślny. Stosowane w czasie rzeczywistym.',
-    edColorsReset: '↩ Resetuj wszystkie kolory',
-    edColorsSecHeader: '📌 Nagłówek & Powitanie',
-    edColorsDial: '🌡 Wskaźnik temperatury',
-    edColorsModeCtrl: '⚡ Tryby & Sterowanie',
-    edColorsStatusRoom: '🏠 Status & Zakładki pokojów',
-    edAcEntity: '❄ Encja klimatyzatora (climate.*)',
-    edRoomTempEntity: '🌡 Czujnik temperatury pokoju (jeśli AC nie ma)',
-    edRoomHumidityEntity: '💧 Czujnik wilgotności pokoju (jeśli AC nie ma)',
-    edRoomPowerEntity: '⚡ Czujnik mocy pokoju (sensor.*)',
-    edAcName: '🏷 Nazwa wyświetlana',
-    edAcIcon: '🎨 MDI Ikona (np. mdi:sofa)',
-    edAcImage: '🖼 Zdjęcie pokoju (URL)',
-    edPm25: '🌫 Pył zawieszony PM2.5',
-    edOutdoorTemp: '🌡 Temperatura zewnętrzna',
-    edHumidity: '💧 Wilgotność zewnętrzna',
-    edPower: '⚡ Zużycie energii (kW)',
-    rooms: ['Salon','Sypialnia','Jadalnia','Biuro'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  sv: {
-    lang: 'Svenska', flag: 'se',
-    cardTitle: 'Luftkonditionering',
-    cardSub:   'Smart Hem',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'God morgon,';
-      if (h>=11 && h<13) return 'God dag,';
-      if (h>=13 && h<18) return 'God eftermiddag,';
-      if (h>=18 && h<21) return 'God kväll,';
-      return 'God natt,';
-    },
-    tempLabel: 'TEMPERATUR',
-    selectRoom: 'VÄLJ RUM',
-    modeLabel: 'LÄGE',
-    statusLabel: 'STATUS',
-    statusOn: 'IGÅNG', statusOff: 'AV',
-    airGood: 'Luftkvalitet bra', pressOn: 'Tryck för att slå på',
-    dustLabel: 'Fint damm',
-    fanLabel: 'Fläkthastighet', swingLabel: 'Luftriktning',
-    allOff: 'Stäng av alla', allOffSub: 'Stäng av alla rum',
-    tapOff: 'Tryck för att stänga av', tapOn: 'Tryck för att slå på',
-    confirmOff: '⚠ Stäng av alla?', confirmSub: function(n) { return 'Stänger av ' + n + ' AC-enheter'; },
-    cancel: 'Avbryt', doOff: '⏻ Stäng av alla',
-    overlayOn: 'PÅ', overlayOff: 'AV',
-    modes: { cool:'Kyla', heat:'Värme', dry:'Avfuktning', fan_only:'Fläkt', auto:'Auto', off:'Av' },
-    fans:   ['Auto','Min','Låg','Låg-Medel','Medel','Medel-Hög','Hög','Max','Låg/Auto','Hög/Auto','Tyst'],
-    swings: ['Fast','Upp/Ned','Vänster/Höger','Alla','Position 1','Position 2','Position 3','Position 4','Position 5','Position 6'],
-    comfort: { dry:'Torr luft', fan_only:'Lätt fräsch bris', off:'För närvarande av' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Mycket kallt, ta på dig något!';
-      if (t<=23) return 'Idealisk temperatur, koppla av';
-      if (t<=27) return 'Bekväm och trevlig';
-      if (t<=31) return 'Lite varmt, kyl mer';
-      return 'För varmt! Justera temperaturen';
-    },
-    timerBtn: 'Timer',
-    bgLabel: 'Gradientbakgrund',
-    timerTitle: '⏰ Timer',
-    timerOff: '⏹ Schemalägg av', timerOn: '▶ Schemalägg på',
-    timerMinPlaceholder: 'Ange minuter...', timerMinUnit: 'min',
-    timerDelete: 'Ta bort timer', timerConfirm: 'Bekräfta',
-    edViewMode: '🖥 Visningsläge',
-    edViewModeFull: 'Full — Fullständig vy',
-    edViewModeLite: 'Lite — Kompakt vy',
-    edPopupStyle: '✨ Popup-stil (Super Lite)',
-    edPopupNormal: 'Normal',
-    edPopupEffect: 'Effekt',
-    edPopupWave: 'Våg',
-    edPresetBar: '🎛 Förinställningsfält (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Visa Eco · Fav · Clean-rad', bgPresets: 'Förinställning',
-    colorLabel: 'Färger', accentColor: 'Accentfärg', textColor: 'Textfärg',
-    color1: 'Färg 1 (övre vänster)', color2: 'Färg 2 (nedre höger)',
-    edLang: 'Språk',
-    edEntities: 'Entiteter',
-    edOwnerName: '👤 Visningsnamn (Smart Hem)',
-    edDisplay: '👁 Visningsalternativ',
-    edShowGreet: 'Hälsning', edShowGreetDesc: 'Visa morgon-/kvällshälsning',
-    edShowCool: '❄ Kyla', edShowHeat: '🔥 Värme',
-    edShowDry: '💧 Torr', edShowFanOnly: '🌀 Fläkt', edShowAuto: '🔄 Auto',
-    edShowFan: 'Fläkthastighet', edShowFanDesc: 'Visa fläkthastighetspanel',
-    edShowSwing: 'Luftriktning', edShowSwingDesc: 'Visa luftriktningspanel',
-    edShowPreset: 'Eco/Fav/Clean-fält', edShowPresetDesc: 'Visa Eco · Fav · Clean-rad',
-    edShowStatus: 'Statusblock', edShowStatusDesc: 'Visa status- & sensorblock till höger',
-    edShowAllOff: 'Stäng av alla-knapp', edShowAllOffDesc: 'Visa stäng av alla-knapp',
-    edShowTimer: 'Timerknapp', edShowTimerDesc: 'Visa timerknapp',
-    edShowRoomEnv: 'Rumstemperatur/Luftfuktighet', edShowRoomEnvDesc: 'Visa rumstemperatur & luftfuktighet (Super Lite)',
-    edShowSlFan: '💨 Fläkthastighet (Super Lite)', edShowSlFanDesc: 'Visa fläktknapp i Super Lite',
-    edShowSlSwing: '🔄 Luftriktning (Super Lite)', edShowSlSwingDesc: 'Visa luftriktningsknapp i Super Lite',
-    edShowSlRoomPower: '⚡ Rumseffekt (Super Lite)', edShowSlRoomPowerDesc: 'Visa elförbrukning för valt rum',
-    edDialInvert: '🔄 Byt ringar', edDialInvertDesc: 'Inställd temp yttre (dra), rumstemperatur inre — standard',
-    edPowerUnit: '⚡ Effektenhet', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Temperaturenhet', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Upprepa snöflingan (s)', edCoolAnimSpeedDesc: 'Väntetid mellan animationer (2–15s)',
-    edShowOutdoorTemp: 'Utomhustemperatur', edShowHumidity: 'Luftfuktighet', edShowPower: 'Effekt (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Antal rum (1–8, standard 4)'; },
-    edRoomsHeader: function(n) { return '❄ Luftkonditioneringar (' + n + ' rum)'; },
-    edRooms: '❄ Luftkonditioneringar',
-    edSensors: '📡 Miljösensorer',
-    edColors: 'Färger',
-    edBg: 'Bakgrund',
-    edBgAlpha: '🔆 Bakgrundstransparens', edBgTransparent: 'Transparent', edBgSolid: 'Ogenomskinlig',
-    edColorsAdvanced: '🎨 Avancerade färger',
-    edColorsDefault: 'Lämna tomt = standardfärg. Tillämpas i realtid.',
-    edColorsReset: '↩ Återställ alla färger',
-    edColorsSecHeader: '📌 Rubrik & Hälsning',
-    edColorsDial: '🌡 Temperaturmätare',
-    edColorsModeCtrl: '⚡ Lägen & Styrning',
-    edColorsStatusRoom: '🏠 Status & Rumflikar',
-    edAcEntity: '❄ AC-entitet (climate.*)',
-    edRoomTempEntity: '🌡 Rumstemperatursensor (om AC saknar det)',
-    edRoomHumidityEntity: '💧 Rumsfuktighetssensor (om AC saknar det)',
-    edRoomPowerEntity: '⚡ Rumseffektsensor (sensor.*)',
-    edAcName: '🏷 Visningsnamn',
-    edAcIcon: '🎨 MDI Ikon (t.ex. mdi:sofa)',
-    edAcImage: '🖼 Rumsfoto (URL)',
-    edPm25: '🌫 Fint damm PM2.5',
-    edOutdoorTemp: '🌡 Utomhustemperatur',
-    edHumidity: '💧 Utomhusfuktighet',
-    edPower: '⚡ Elförbrukning (kW)',
-    rooms: ['Vardagsrum','Sovrum','Matsal','Kontor'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  hu: {
-    lang: 'Magyar', flag: 'hu',
-    cardTitle: 'Légkondicionáló',
-    cardSub:   'Okos Otthon',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Jó reggelt,';
-      if (h>=11 && h<13) return 'Jó napot,';
-      if (h>=13 && h<18) return 'Jó napot,';
-      if (h>=18 && h<21) return 'Jó estét,';
-      return 'Jó éjszakát,';
-    },
-    tempLabel: 'HŐMÉRSÉKLET',
-    selectRoom: 'SZOBA VÁLASZTÁSA',
-    modeLabel: 'MÓD',
-    statusLabel: 'ÁLLAPOT',
-    statusOn: 'MŰKÖDİK', statusOff: 'KI',
-    airGood: 'Levegőminőség jó', pressOn: 'Nyomja meg a bekapcsoláshoz',
-    dustLabel: 'Finom por',
-    fanLabel: 'Ventilátorsebesség', swingLabel: 'Légáramlás iránya',
-    allOff: 'Mindet kikapcsolni', allOffSub: 'Összes szoba kikapcsolása',
-    tapOff: 'Érintse ki a kikapcsoláshoz', tapOn: 'Érintse meg a bekapcsoláshoz',
-    confirmOff: '⚠ Mindet kikapcsolni?', confirmSub: function(n) { return n + ' légkondicionálót kapcsol ki egyszerre'; },
-    cancel: 'Mégse', doOff: '⏻ Mindet ki',
-    overlayOn: 'BE', overlayOff: 'KI',
-    modes: { cool:'Hűtés', heat:'Fűtés', dry:'Párátlanítás', fan_only:'Ventilátor', auto:'Auto', off:'Ki' },
-    fans:   ['Auto','Min','Alacsony','Alacsony-Közepes','Közepes','Közepes-Magas','Magas','Max','Alacsony/Auto','Magas/Auto','Csendes'],
-    swings: ['Rögzített','Fel/Le','Bal/Jobb','Mindkettő','1. pozíció','2. pozíció','3. pozíció','4. pozíció','5. pozíció','6. pozíció'],
-    comfort: { dry:'Száraz levegő', fan_only:'Könnyű friss szellő', off:'Jelenleg kikapcsolt' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Nagyon hideg, vegyél fel valamit!';
-      if (t<=23) return 'Ideális hőmérséklet, pihenj';
-      if (t<=27) return 'Kényelmes és kellemes';
-      if (t<=31) return 'Kicsit meleg, jobban hűteni';
-      return 'Túl meleg! Állítsa be a hőmérsékletet';
-    },
-    timerBtn: 'Időzítő',
-    timerTitle: '⏰ Időzítő',
-    timerOff: '⏹ Kikapcsolás ütemezése', timerOn: '▶ Bekapcsolás ütemezése',
-    timerMinPlaceholder: 'Adja meg a perceket...', timerMinUnit: 'perc',
-    timerDelete: 'Időzítő törlése', timerConfirm: 'Megerősítés',
-    edViewMode: '🖥 Megjelenítési mód',
-    edViewModeFull: 'Full — Teljes nézet',
-    edViewModeLite: 'Lite — Kompakt nézet',
-    edPopupStyle: '✨ Felugró ablak stílus (Super Lite)',
-    edPopupNormal: 'Normál',
-    edPopupEffect: 'Effekt',
-    edPopupWave: 'Hullám',
-    edPresetBar: '🎛 Beállítássáv (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Eco · Fav · Clean sor megjelenítése',
-    bgLabel: 'Gradiens háttér', bgPresets: 'Előbeállítás',
-    colorLabel: 'Színek', accentColor: 'Kiemelőszín', textColor: 'Szövegszín',
-    color1: 'Szín 1 (bal felső)', color2: 'Szín 2 (jobb alsó)',
-    edLang: 'Nyelv',
-    edEntities: 'Entitások',
-    edOwnerName: '👤 Megjelenítési név (Okos Otthon)',
-    edDisplay: '👁 Megjelenítési beállítások',
-    edShowGreet: 'Üdvözlet', edShowGreetDesc: 'Reggeli/esti köszöntő megjelenítése',
-    edShowCool: '❄ Hűtés', edShowHeat: '🔥 Fűtés',
-    edShowDry: '💧 Szárítás', edShowFanOnly: '🌀 Ventilátor', edShowAuto: '🔄 Auto',
-    edShowFan: 'Ventilátor sebesség', edShowFanDesc: 'Ventilátor vezérlőpanel megjelenítése',
-    edShowSwing: 'Légáramlás', edShowSwingDesc: 'Légáramlás panel megjelenítése',
-    edShowPreset: 'Eco/Fav/Clean sáv', edShowPresetDesc: 'Eco · Fav · Clean sor megjelenítése',
-    edShowStatus: 'Állapot panel', edShowStatusDesc: 'Állapot és szenzor blokk megjelenítése',
-    edShowAllOff: 'Mindent kikapcsol gomb', edShowAllOffDesc: 'Mindent kikapcsol gomb megjelenítése',
-    edShowTimer: 'Időzítő gomb', edShowTimerDesc: 'Időzítő gomb megjelenítése',
-    edShowRoomEnv: 'Szoba hőmérséklet/páratartalom', edShowRoomEnvDesc: 'Szoba hőmérséklet & páratartalom mutatása (Super Lite)',
-    edShowSlFan: '💨 Ventilátor sebesség (Super Lite)', edShowSlFanDesc: 'Ventilátor gomb mutatása Super Lite-ban',
-    edShowSlSwing: '🔄 Légáramlat (Super Lite)', edShowSlSwingDesc: 'Légáramlat gomb mutatása Super Lite-ban',
-    edShowSlRoomPower: '⚡ Szoba fogyasztás (Super Lite)', edShowSlRoomPowerDesc: 'Kiválasztott szoba fogyasztásának mutatása',
-    edDialInvert: '🔄 Gyűrűk cseréje', edDialInvertDesc: 'Célhőmérséklet külső (húzás), szobahőm. belső — alapértelmezett',
-    edPowerUnit: '⚡ Teljesítményegység', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Hőmérsékleti egység', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Hópehely ismétlése (s)', edCoolAnimSpeedDesc: 'Várakozási idő animációk között (2–15s)',
-    edShowOutdoorTemp: 'Kültéri hőmérséklet', edShowHumidity: 'Páratartalom', edShowPower: 'Teljesítmény (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Szobák száma (1–8, alapértelmezett 4)'; },
-    edRoomsHeader: function(n) { return '❄ Légkondicionáló (' + n + ' szoba)'; },
-    edRooms: '❄ Légkondicionáló',
-    edSensors: '📡 Környezeti érzékelők',
-    edColors: 'Színek',
-    edBg: 'Háttér',
-    edBgAlpha: '🔆 Háttér átlátszósága', edBgTransparent: 'Átlátszó', edBgSolid: 'Átlátszatlan',
-    edColorsAdvanced: '🎨 Speciális színek',
-    edColorsDefault: 'Hagyja üresen = alapszín. Azonnal érvényes.',
-    edColorsReset: '↩ Összes szín visszaállítása',
-    edColorsSecHeader: '📌 Fejléc & Üdvözlés',
-    edColorsDial: '🌡 Hőmérséklet-tárcsa',
-    edColorsModeCtrl: '⚡ Módok & Vezérlés',
-    edColorsStatusRoom: '🏠 Állapot & Szobafülek',
-    edAcEntity: '❄ Légkondicionáló entitás (climate.*)',
-    edRoomTempEntity: '🌡 Szobahőmérséklet-érzékelő (ha AC nem rendelkezik)',
-    edRoomHumidityEntity: '💧 Szobapáratartalom-érzékelő (ha AC nem rendelkezik)',
-    edRoomPowerEntity: '⚡ Szoba fogyasztásmérő (sensor.*)',
-    edAcName: '🏷 Megjelenítési név',
-    edAcIcon: '🎨 MDI Ikon (t.ex. mdi:sofa)',
-    edAcImage: '🖼 Rumsfoto (URL)',
-    edPm25: '🌫 Finom por PM2.5',
-    edOutdoorTemp: '🌡 Kültéri hőmérséklet',
-    edHumidity: '💧 Kültéri páratartalom',
-    edPower: '⚡ Energiafogyasztás (kW)',
-    rooms: ['Nappali','Hálószoba','Étkező','Iroda'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  cs: {
-    lang: 'Čeština', flag: 'cz',
-    cardTitle: 'Klimatizace',
-    cardSub:   'Chytrý Dům',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Dobré ráno,';
-      if (h>=11 && h<13) return 'Dobrý den,';
-      if (h>=13 && h<18) return 'Dobré odpoledne,';
-      if (h>=18 && h<21) return 'Dobrý večer,';
-      return 'Dobrou noc,';
-    },
-    tempLabel: 'TEPLOTA',
-    selectRoom: 'VYBRAT MÍSTNOST',
-    modeLabel: 'REŽIM',
-    statusLabel: 'STAV',
-    statusOn: 'BĚŽÍ', statusOff: 'VYPNUTO',
-    airGood: 'Kvalita vzduchu dobrá', pressOn: 'Stiskněte pro zapnutí',
-    dustLabel: 'Jemný prach',
-    fanLabel: 'Rychlost ventilátoru', swingLabel: 'Směr proudění',
-    allOff: 'Vše vypnout', allOffSub: 'Vypnout všechny místnosti',
-    tapOff: 'Stiskněte pro vypnutí', tapOn: 'Stiskněte pro zapnutí',
-    confirmOff: '⚠ Vše vypnout?', confirmSub: function(n) { return 'Vypne ' + n + ' klimatizací najednou'; },
-    cancel: 'Zrušit', doOff: '⏻ Vše vypnout',
-    overlayOn: 'ZAP', overlayOff: 'VYP',
-    modes: { cool:'Chlazení', heat:'Topení', dry:'Odvlhčování', fan_only:'Ventilátor', auto:'Auto', off:'Vypnout' },
-    fans:   ['Auto','Min','Nízká','Nízká-Střední','Střední','Střední-Vysoká','Vysoká','Max','Nízká/Auto','Vysoká/Auto','Tichý'],
-    swings: ['Pevný','Nahoru/Dolů','Vlevo/Vpravo','Vše','Pozice 1','Pozice 2','Pozice 3','Pozice 4','Pozice 5','Pozice 6'],
-    comfort: { dry:'Suchý vzduch', fan_only:'Lehký svěží vánek', off:'Momentálně vypnuto' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Velmi chladno, oblečte se!';
-      if (t<=23) return 'Ideální teplota, relaxujte';
-      if (t<=27) return 'Pohodlné a příjemné';
-      if (t<=31) return 'Trochu teplo, více chladit';
-      return 'Příliš horko! Nastavte teplotu';
-    },
-    timerBtn: 'Časovač',
-    timerTitle: '⏰ Časovač',
-    timerOff: '⏹ Naplánovat vypnutí', timerOn: '▶ Naplánovat zapnutí',
-    timerMinPlaceholder: 'Zadejte minuty...', timerMinUnit: 'min',
-    timerDelete: 'Smazat časovač', timerConfirm: 'Potvrdit',
-    edViewMode: '🖥 Režim zobrazení',
-    edViewModeFull: 'Full — Úplné zobrazení',
-    edViewModeLite: 'Lite — Kompaktní zobrazení',
-    edPopupStyle: '✨ Styl vyskakovacího okna (Super Lite)',
-    edPopupNormal: 'Normální',
-    edPopupEffect: 'Efekt',
-    edPopupWave: 'Vlna',
-    edPresetBar: '🎛 Panel předvoleb (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Zobrazit řádek Eco · Fav · Clean',
-    bgLabel: 'Přechodové pozadí', bgPresets: 'Předvolba',
-    colorLabel: 'Barvy', accentColor: 'Barva zvýraznění', textColor: 'Barva textu',
-    color1: 'Barva 1 (vlevo nahoře)', color2: 'Barva 2 (vpravo dole)',
-    edLang: 'Jazyk',
-    edEntities: 'Entity',
-    edOwnerName: '👤 Zobrazovaný název (Chytrý Dům)',
-    edDisplay: '👁 Možnosti zobrazení',
-    edShowGreet: 'Pozdrav', edShowGreetDesc: 'Zobrazit ranní/večerní pozdrav',
-    edShowCool: '❄ Chlazení', edShowHeat: '🔥 Topení',
-    edShowDry: '💧 Sušení', edShowFanOnly: '🌀 Ventilátor', edShowAuto: '🔄 Auto',
-    edShowFan: 'Rychlost ventilátoru', edShowFanDesc: 'Zobrazit panel rychlosti ventilátoru',
-    edShowSwing: 'Směr vzduchu', edShowSwingDesc: 'Zobrazit panel směru vzduchu',
-    edShowPreset: 'Lišta Eco/Fav/Clean', edShowPresetDesc: 'Zobrazit řádek Eco · Fav · Clean',
-    edShowStatus: 'Stavový blok', edShowStatusDesc: 'Zobrazit blok stavu a senzorů vpravo',
-    edShowAllOff: 'Tlačítko vše vypnout', edShowAllOffDesc: 'Zobrazit tlačítko vše vypnout',
-    edShowTimer: 'Tlačítko časovače', edShowTimerDesc: 'Zobrazit tlačítko časovače',
-    edShowRoomEnv: 'Teplota/vlhkost místnosti', edShowRoomEnvDesc: 'Zobrazit teplotu & vlhkost místnosti (Super Lite)',
-    edShowSlFan: '💨 Rychlost ventilátoru (Super Lite)', edShowSlFanDesc: 'Zobrazit tlačítko ventilátoru v Super Lite',
-    edShowSlSwing: '🔄 Směr vzduchu (Super Lite)', edShowSlSwingDesc: 'Zobrazit tlačítko směru v Super Lite',
-    edShowSlRoomPower: '⚡ Spotřeba místnosti (Super Lite)', edShowSlRoomPowerDesc: 'Zobrazit spotřebu vybrané místnosti',
-    edDialInvert: '🔄 Přehodit kruhy', edDialInvertDesc: 'Nastavená teplota vně (tažení), teplota místnosti uvnitř — výchozí',
-    edPowerUnit: '⚡ Jednotka výkonu', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Jednotka teploty', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Opakování sněhové vločky (s)', edCoolAnimSpeedDesc: 'Čekání mezi animacemi (2–15s)',
-    edShowOutdoorTemp: 'Venkovní teplota', edShowHumidity: 'Vlhkost', edShowPower: 'Výkon (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Počet místností (1–8, výchozí 4)'; },
-    edRoomsHeader: function(n) { return '❄ Klimatizace (' + n + ' místností)'; },
-    edRooms: '❄ Klimatizace',
-    edSensors: '📡 Senzory prostředí',
-    edColors: 'Barvy',
-    edBg: 'Pozadí',
-    edBgAlpha: '🔆 Průhlednost pozadí', edBgTransparent: 'Průhledné', edBgSolid: 'Neprůhledné',
-    edColorsAdvanced: '🎨 Pokročilé barvy',
-    edColorsDefault: 'Ponechte prázdné = výchozí barva. Aplikuje se v reálném čase.',
-    edColorsReset: '↩ Obnovit všechny barvy',
-    edColorsSecHeader: '📌 Záhlaví & Pozdrav',
-    edColorsDial: '🌡 Teplotní ciferník',
-    edColorsModeCtrl: '⚡ Režimy & Ovládání',
-    edColorsStatusRoom: '🏠 Stav & Karty místností',
-    edAcEntity: '❄ Entita klimatizace (climate.*)',
-    edRoomTempEntity: '🌡 Senzor teploty v místnosti (pokud AC nemá)',
-    edRoomHumidityEntity: '💧 Senzor vlhkosti v místnosti (pokud AC nemá)',
-    edRoomPowerEntity: '⚡ Senzor spotřeby místnosti (sensor.*)',
-    edAcName: '🏷 Zobrazovaný název',
-    edAcIcon: '🎨 MDI Ikona (np. mdi:sofa)',
-    edAcImage: '🖼 Zdjęcie pokoju (URL)',
-    edPm25: '🌫 Jemný prach PM2.5',
-    edOutdoorTemp: '🌡 Venkovní teplota',
-    edHumidity: '💧 Venkovní vlhkost',
-    edPower: '⚡ Spotřeba energie (kW)',
-    rooms: ['Obývací pokoj','Ložnice','Jídelna','Kancelář'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  it: {
-    lang: 'Italiano', flag: 'it',
-    cardTitle: 'Condizionatore',
-    cardSub:   'Casa Intelligente',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Buongiorno,';
-      if (h>=11 && h<13) return 'Buon pomeriggio,';
-      if (h>=13 && h<18) return 'Buon pomeriggio,';
-      if (h>=18 && h<21) return 'Buonasera,';
-      return 'Buonanotte,';
-    },
-    tempLabel: 'TEMPERATURA',
-    selectRoom: 'SELEZIONA STANZA',
-    modeLabel: 'MODALITÀ',
-    statusLabel: 'STATO',
-    statusOn: 'IN FUNZIONE', statusOff: 'SPENTO',
-    airGood: 'Qualità dell\'aria buona', outdoorLabel: 'Outdoor', pressOn: 'Premi per accendere',
-    dustLabel: 'Polvere fine',
-    fanLabel: 'Velocità ventilatore', swingLabel: 'Direzione flusso',
-    allOff: 'Spegni tutti', allOffSub: 'Spegni tutte le stanze',
-    tapOff: 'Premi per spegnere', tapOn: 'Premi per accendere',
-    confirmOff: '⚠ Spegnere tutto?', confirmSub: function(n) { return 'Spegnerà ' + n + ' condizionatori contemporaneamente'; },
-    cancel: 'Annulla', doOff: '⏻ Spegni tutti',
-    overlayOn: 'ACCESO', overlayOff: 'SPENTO',
-    modes: { cool:'Raffreddamento', heat:'Riscaldamento', dry:'Deumidificazione', fan_only:'Ventilatore', auto:'Automatico', off:'Spento' },
-    fans:   ['Auto','Min','Bassa','Bassa-Media','Media','Media-Alta','Alta','Max','Bassa/Auto','Alta/Auto','Silenzioso'],
-    swings: ['Fisso','Su/Giù','Sinistra/Destra','Tutti','Posizione 1','Posizione 2','Posizione 3','Posizione 4','Posizione 5','Posizione 6'],
-    comfort: { dry:'Aria secca', fan_only:'Brezza leggera e fresca', off:'Attualmente spento' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Molto freddo, mettiti qualcosa!';
-      if (t<=23) return 'Temperatura ideale, rilassati';
-      if (t<=27) return 'Comodo e piacevole';
-      if (t<=31) return 'Un po\' caldo, raffreddare di più';
-      return 'Troppo caldo! Regola la temperatura';
-    },
-    timerBtn: 'Timer',
-    bgLabel: 'Sfondo sfumato',
-    timerTitle: '⏰ Timer',
-    timerOff: '⏹ Programma spegnimento', timerOn: '▶ Programma accensione',
-    timerMinPlaceholder: 'Inserisci minuti...', timerMinUnit: 'min',
-    timerDelete: 'Elimina timer', timerConfirm: 'Conferma',
-    edViewMode: '🖥 Modalità display',
-    edViewModeFull: 'Full — Vista completa',
-    edViewModeLite: 'Lite — Vista compatta',
-    edPopupStyle: '✨ Stile popup (Super Lite)',
-    edPopupNormal: 'Normale',
-    edPopupEffect: 'Effetto',
-    edPopupWave: 'Onda',
-    edPresetBar: '🎛 Barra preset (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Mostra riga Eco · Fav · Clean', bgPresets: 'Preimpostazione',
-    colorLabel: 'Colori', accentColor: 'Colore accento', textColor: 'Colore testo',
-    color1: 'Colore 1 (in alto a sinistra)', color2: 'Colore 2 (in basso a destra)',
-    edLang: 'Lingua',
-    edEntities: 'Entità',
-    edOwnerName: '👤 Nome visualizzato (Casa Intelligente)',
-    edDisplay: '👁 Opzioni di visualizzazione',
-    edShowGreet: 'Saluto', edShowGreetDesc: 'Mostra saluto mattina/sera',
-    edShowCool: '❄ Raffreddamento', edShowHeat: '🔥 Riscaldamento',
-    edShowDry: '💧 Deumidificazione', edShowFanOnly: '🌀 Ventilatore', edShowAuto: '🔄 Automatico',
-    edShowFan: 'Velocità ventilatore', edShowFanDesc: 'Mostra pannello velocità ventilatore',
-    edShowSwing: 'Direzione aria', edShowSwingDesc: 'Mostra pannello direzione aria',
-    edShowPreset: 'Barra Eco/Fav/Clean', edShowPresetDesc: 'Mostra riga Eco · Fav · Clean',
-    edShowStatus: 'Blocco stato', edShowStatusDesc: 'Mostra blocco stato e sensori a destra',
-    edShowAllOff: 'Pulsante spegni tutto', edShowAllOffDesc: 'Mostra pulsante spegni tutto',
-    edShowTimer: 'Pulsante timer', edShowTimerDesc: 'Mostra pulsante timer',
-    edShowRoomEnv: 'Temp/Umidità stanza', edShowRoomEnvDesc: 'Mostra temp. & umidità stanza (Super Lite)',
-    edShowSlFan: '💨 Velocità ventilatore (Super Lite)', edShowSlFanDesc: 'Mostra pulsante ventilatore in Super Lite',
-    edShowSlSwing: '🔄 Direzione aria (Super Lite)', edShowSlSwingDesc: 'Mostra pulsante direzione in Super Lite',
-    edShowSlRoomPower: '⚡ Consumo stanza (Super Lite)', edShowSlRoomPowerDesc: 'Mostra consumo stanza selezionata',
-    edDialInvert: '🔄 Scambia anelli', edDialInvertDesc: 'Temp. impostata esterna (trascina), temp. stanza interna — default',
-    edPowerUnit: '⚡ Unità potenza', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Unità di temperatura', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Ripetizione fiocco di neve (s)', edCoolAnimSpeedDesc: 'Attesa tra le animazioni (2–15s)',
-    edShowOutdoorTemp: 'Temperatura esterna', edShowHumidity: 'Umidità', edShowPower: 'Potenza (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Numero di stanze (1–8, predefinito 4)'; },
-    edRoomsHeader: function(n) { return '❄ Condizionatori (' + n + ' stanze)'; },
-    edRooms: '❄ Condizionatori',
-    edSensors: '📡 Sensori ambientali',
-    edColors: 'Colori',
-    edBg: 'Sfondo',
-    edBgAlpha: '🔆 Trasparenza sfondo', edBgTransparent: 'Trasparente', edBgSolid: 'Opaco',
-    edColorsAdvanced: '🎨 Colori avanzati',
-    edColorsDefault: 'Lascia vuoto = colore predefinito. Applicato in tempo reale.',
-    edColorsReset: '↩ Ripristina tutti i colori',
-    edColorsSecHeader: '📌 Intestazione & Saluto',
-    edColorsDial: '🌡 Quadrante temperatura',
-    edColorsModeCtrl: '⚡ Modalità & Controlli',
-    edColorsStatusRoom: '🏠 Stato & Schede stanza',
-    edAcEntity: '❄ Entità condizionatore (climate.*)',
-    edRoomTempEntity: '🌡 Sensore temperatura stanza (se AC non ce l\'ha)',
-    edRoomHumidityEntity: '💧 Sensore umidità stanza (se AC non ce l\'ha)',
-    edRoomPowerEntity: '⚡ Sensore potenza stanza (sensor.*)',
-    edAcName: '🏷 Nome visualizzato',
-    edAcIcon: '🎨 Icona MDI (es. mdi:sofa)',
-    edAcImage: '🖼 Foto stanza (URL)',
-    edPm25: '🌫 Polvere fine PM2.5',
-    edOutdoorTemp: '🌡 Temperatura esterna',
-    edHumidity: '💧 Umidità esterna',
-    edPower: '⚡ Consumo energetico (kW)',
-    rooms: ['Soggiorno','Camera da letto','Sala da pranzo','Ufficio'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  pt: {
-    lang: 'Português', flag: 'pt',
-    cardTitle: 'Ar Condicionado',
-    cardSub:   'Casa Inteligente',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Bom dia,';
-      if (h>=11 && h<13) return 'Bom dia,';
-      if (h>=13 && h<18) return 'Boa tarde,';
-      if (h>=18 && h<21) return 'Boa noite,';
-      return 'Boa noite,';
-    },
-    tempLabel: 'TEMPERATURA',
-    selectRoom: 'ESCOLHER SALA',
-    modeLabel: 'MODO',
-    statusLabel: 'ESTADO',
-    statusOn: 'A FUNCIONAR', statusOff: 'DESLIGADO',
-    airGood: 'Qualidade do ar boa', outdoorLabel: 'Outdoor', pressOn: 'Prima para ligar',
-    dustLabel: 'Pó fino',
-    fanLabel: 'Velocidade do ventilador', swingLabel: 'Direção do fluxo',
-    allOff: 'Desligar todos', allOffSub: 'Desligar todas as salas',
-    tapOff: 'Prima para desligar', tapOn: 'Prima para ligar',
-    confirmOff: '⚠ Desligar todos?', confirmSub: function(n) { return 'Irá desligar ' + n + ' ar condicionados ao mesmo tempo'; },
-    cancel: 'Cancelar', doOff: '⏻ Desligar todos',
-    overlayOn: 'LIGADO', overlayOff: 'DESLIGADO',
-    modes: { cool:'Arrefecer', heat:'Aquecer', dry:'Desumidificar', fan_only:'Ventilador', auto:'Automático', off:'Desligado' },
-    fans:   ['Auto','Min','Baixo','Baixo-Médio','Médio','Médio-Alto','Alto','Max','Baixo/Auto','Alto/Auto','Silencioso'],
-    swings: ['Fixo','Cima/Baixo','Esquerda/Direita','Todos','Posição 1','Posição 2','Posição 3','Posição 4','Posição 5','Posição 6'],
-    comfort: { dry:'Ar seco e confortável', fan_only:'Brisa leve e fresca', off:'Atualmente desligado' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Muito frio, vista mais roupa!';
-      if (t<=23) return 'Temperatura ideal, relaxe';
-      if (t<=27) return 'Confortável e agradável';
-      if (t<=31) return 'Um pouco quente, arrefecer mais';
-      return 'Demasiado quente! Ajuste a temperatura';
-    },
-    timerBtn: 'Temporizador',
-    timerTitle: '⏰ Temporizador',
-    timerOff: '⏹ Agendar desligamento', timerOn: '▶ Agendar ligamento',
-    timerMinPlaceholder: 'Inserir minutos...', timerMinUnit: 'min',
-    timerDelete: 'Apagar temporizador', timerConfirm: 'Confirmar',
-    edViewMode: '🖥 Modo de exibição',
-    edViewModeFull: 'Full — Vista completa',
-    edViewModeLite: 'Lite — Vista compacta',
-    edPopupStyle: '✨ Estilo popup (Super Lite)',
-    edPopupNormal: 'Normal',
-    edPopupEffect: 'Efeito',
-    edPopupWave: 'Onda',
-    edPresetBar: '🎛 Barra de predefinições (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Mostrar linha Eco · Fav · Clean',
-    bgLabel: 'Fundo gradiente', bgPresets: 'Predefinição',
-    colorLabel: 'Cores', accentColor: 'Cor de destaque', textColor: 'Cor do texto',
-    color1: 'Cor 1 (canto superior esquerdo)', color2: 'Cor 2 (canto inferior direito)',
-    edLang: 'Idioma',
-    edEntities: 'Entidades',
-    edOwnerName: '👤 Nome exibido (Casa Inteligente)',
-    edDisplay: '👁 Opções de exibição',
-    edShowGreet: 'Saudação', edShowGreetDesc: 'Mostrar saudação manhã/noite',
-    edShowCool: '❄ Refrigeração', edShowHeat: '🔥 Aquecimento',
-    edShowDry: '💧 Desumidificação', edShowFanOnly: '🌀 Ventilador', edShowAuto: '🔄 Automático',
-    edShowFan: 'Velocidade do ventilador', edShowFanDesc: 'Mostrar painel de velocidade',
-    edShowSwing: 'Direção do ar', edShowSwingDesc: 'Mostrar painel de direção do ar',
-    edShowPreset: 'Barra Eco/Fav/Clean', edShowPresetDesc: 'Mostrar linha Eco · Fav · Clean',
-    edShowStatus: 'Bloco de status', edShowStatusDesc: 'Mostrar bloco de status e sensores',
-    edShowAllOff: 'Botão desligar tudo', edShowAllOffDesc: 'Mostrar botão desligar tudo',
-    edShowTimer: 'Botão temporizador', edShowTimerDesc: 'Mostrar botão temporizador',
-    edShowRoomEnv: 'Temp/Humidade do quarto', edShowRoomEnvDesc: 'Mostrar temp. & humidade do quarto (Super Lite)',
-    edShowSlFan: '💨 Velocidade do ventilador (Super Lite)', edShowSlFanDesc: 'Mostrar botão ventilador em Super Lite',
-    edShowSlSwing: '🔄 Direção do ar (Super Lite)', edShowSlSwingDesc: 'Mostrar botão de direção em Super Lite',
-    edShowSlRoomPower: '⚡ Consumo sala (Super Lite)', edShowSlRoomPowerDesc: 'Mostrar consumo da sala selecionada',
-    edDialInvert: '🔄 Trocar anéis', edDialInvertDesc: 'Temp. definida fora (arrastar), temp. sala dentro — padrão',
-    edPowerUnit: '⚡ Unidade de potência', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Unidade de temperatura', edTempUnitC: '°C — Celsius', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Repetição do floco de neve (s)', edCoolAnimSpeedDesc: 'Aguardar entre animações (2–15s)',
-    edShowOutdoorTemp: 'Temperatura externa', edShowHumidity: 'Humidade', edShowPower: 'Potência (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Número de salas (1–8, padrão 4)'; },
-    edRoomsHeader: function(n) { return '❄ Ar Condicionados (' + n + ' salas)'; },
-    edRooms: '❄ Ar Condicionados',
-    edSensors: '📡 Sensores ambientais',
-    edColors: 'Cores',
-    edBg: 'Fundo',
-    edBgAlpha: '🔆 Transparência do fundo', edBgTransparent: 'Transparente', edBgSolid: 'Sólido',
-    edColorsAdvanced: '🎨 Cores avançadas',
-    edColorsDefault: 'Deixe em branco = cor padrão. Aplicado em tempo real.',
-    edColorsReset: '↩ Repor todas as cores',
-    edColorsSecHeader: '📌 Cabeçalho & Saudação',
-    edColorsDial: '🌡 Mostrador de temperatura',
-    edColorsModeCtrl: '⚡ Modos & Controlos',
-    edColorsStatusRoom: '🏠 Estado & Separadores de sala',
-    edAcEntity: '❄ Entidade AC (climate.*)',
-    edRoomTempEntity: '🌡 Sensor temperatura sala (se AC não tiver)',
-    edRoomHumidityEntity: '💧 Sensor humidade sala (se AC não tiver)',
-    edRoomPowerEntity: '⚡ Sensor consumo sala (sensor.*)',
-    edAcName: '🏷 Nome exibido',
-    edAcIcon: '🎨 Ícone MDI (ex: mdi:sofa)',
-    edAcImage: '🖼 Foto do quarto (URL)',
-    edPm25: '🌫 Pó fino PM2.5',
-    edOutdoorTemp: '🌡 Temperatura exterior',
-    edHumidity: '💧 Humidade exterior',
-    edPower: '⚡ Consumo de energia (kW)',
-    rooms: ['Sala de estar','Quarto','Sala de jantar','Escritório'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
-  sl: {
-    lang: 'Slovenščina', flag: 'si',
-    cardTitle: 'Klimatska Naprava',
-    cardSub:   'Pametni Dom',
-    greet: function() {
-      var h = new Date().getHours();
-      if (h>=6  && h<11) return 'Dobro jutro,';
-      if (h>=11 && h<13) return 'Dober dan,';
-      if (h>=13 && h<18) return 'Dober popoldan,';
-      if (h>=18 && h<21) return 'Dober večer,';
-      return 'Lahko noč,';
-    },
-    tempLabel: 'TEMPERATURA',
-    selectRoom: 'IZBERI PROSTOR',
-    modeLabel: 'NAČIN',
-    statusLabel: 'STANJE',
-    statusOn: 'DELUJE', statusOff: 'IZKLOP',
-    airGood: 'Kakovost zraka je dobra', outdoorLabel: 'Zunaj', pressOn: 'Pritisni za vklop',
-    dustLabel: 'Prah PM2.5',
-    fanLabel: 'Hitrost ventilatorja', swingLabel: 'Smer pihanja',
-    allOff: 'Izklopi vse', allOffSub: 'Pritisni za izklop vseh prostorov',
-    tapOff: 'Pritisni za izklop', tapOn: 'Pritisni za vklop',
-    confirmOff: '⚠ Izklopiti vse?', confirmSub: function(n) { return 'Izklopljenih bo ' + n + ' naprav hkrati'; },
-    cancel: 'Prekliči', doOff: '⏻ Izklopi vse',
-    overlayOn: 'VKLOPLJENO', overlayOff: 'IZKLOP',
-    modes: { cool:'Hlajenje', heat:'Gretje', dry:'Razvlaževanje', fan_only:'Ventilator', auto:'Samodejno', off:'Izklop' },
-    fans:   ['Samodejno','Min','Nizko','Nizko-Srednje','Srednje','Srednje-Visoko','Visoko','Max','Nizko/Auto','Visoko/Auto','Tiho'],
-    swings: ['Fiksno','Gor-dol','Levo-desno','Vse smeri','Položaj 1','Položaj 2','Položaj 3','Položaj 4','Položaj 5','Položaj 6'],
-    comfort: { dry:'Suh zrak', fan_only:'Svež vetrič', off:'Izklopljeno' },
-    comfortTemp: function(t) {
-      t = Math.round(t);
-      if (t<=19) return 'Zelo mrzlo, oblecite se!';
-      if (t<=23) return 'Idealna temperatura, sprostite se';
-      if (t<=27) return 'Prijetno in udobno';
-      if (t<=31) return 'Postaja toplo, potrebno hlajenje';
-      return 'Prevroče! Prilagodite temperaturo';
-    },
-    centralAcLabel: '🏢 Centralna klima', centralAcDesc: 'Vklopite za nastavitev loput (damper)',
-    damperAdd: '+ Dodaj loputo', damperRemove: 'Odstrani',
-    damperEntity: 'Entiteta lopute (cover.*)', damperName: 'Ime lopute',
-    damperLabel: 'Pretok zraka', damperOpen: 'Odprto', damperClosed: 'Zaprto',
-    timerBtn: 'Časovnik',
-    timerTitle: '⏰ Časovnik',
-    timerOff: '⏹ Izklop ob', timerOn: '▶ Vklop ob',
-    timerMinPlaceholder: 'Vnesi minute...', timerMinUnit: 'min',
-    timerDelete: 'Izbriši', timerConfirm: 'Potrdi',
-    edViewMode: '🖥 Način prikaza',
-    edViewModeFull: 'Full — Polno',
-    edViewModeLite: 'Lite — Kompaktno',
-    edPopupStyle: '✨ Stil pojavnega okna (Super Lite)',
-    edPopupNormal: 'Navadno',
-    edPopupEffect: 'Učinek',
-    edPopupWave: 'Valovanje',
-    edPresetBar: '🎛 Vrstica z možnostmi (Eco / Fav / Clean)',
-    edPresetBarDesc: 'Prikaži vrstico Eco · Fav · Clean',
-    bgLabel: 'Gradientno ozadje', bgPresets: 'Prednastavitve',
-    colorLabel: 'Barve', accentColor: 'Poudarjena barva (accent)', textColor: 'Barva besedila',
-    color1: 'Barva 1 (zgoraj levo)', color2: 'Barva 2 (spodaj desno)',
-    edLang: 'Jezik',
-    edEntities: 'Entitete (Entity)',
-    edOwnerName: '👤 Prikazano ime (Smart Home)',
-    edDisplay: '👁 Možnosti prikaza',
-    edShowGreet: 'Pozdrav', edShowGreetDesc: 'Prikaži jutranji/popoldanski/večerni pozdrav',
-    edShowCool: '❄ Hlajenje (Cool)', edShowHeat: '🔥 Gretje (Heat)',
-    edShowDry: '💧 Razvlaževanje (Dry)', edShowFanOnly: '🌀 Ventilator (Fan)', edShowAuto: '🔄 Samodejno (Auto)',
-    edShowFan: 'Hitrost ventilatorja', edShowFanDesc: 'Prikaži nadzor hitrosti ventilatorja',
-    edShowSwing: 'Smer pihanja', edShowSwingDesc: 'Prikaži nadzor smeri pihanja',
-    edShowPreset: 'Vrstica Eco/Fav/Clean', edShowPresetDesc: 'Prikaži gumbe Eco · Fav · Clean',
-    edShowStatus: 'Statusna plošča', edShowStatusDesc: 'Prikaži bloke stanja in senzorjev na desni',
-    edShowAllOff: 'Gumb Izklopi vse', edShowAllOffDesc: 'Prikaži gumb za izklop vseh klim',
-    edShowTimer: 'Gumb Časovnik', edShowTimerDesc: 'Prikaži gumb za časovnik vklopa/izklopa',
-    edShowRoomEnv: 'Temperatura/Vlaga v prostoru', edShowRoomEnvDesc: 'Prikaži temp. in vlago izbranega prostora (Super Lite)',
-    edShowSlFan: '💨 Hitrost ventilatorja (Super Lite)', edShowSlFanDesc: 'Prikaži gumb ventilatorja v Super Lite',
-    edShowSlSwing: '🔄 Smer pihanja (Super Lite)', edShowSlSwingDesc: 'Prikaži gumb smeri v Super Lite',
-    edShowSlRoomPower: '⚡ Poraba v prostoru (Super Lite)', edShowSlRoomPowerDesc: 'Prikaži porabo energije izbranega prostora',
-    edDialInvert: '🔄 Obrni temperaturni krog', edDialInvertDesc: 'Nastavljena temp. zunaj, sobna temp. znotraj — privzeto',
-    edPowerUnit: '⚡ Enota moči', edPowerUnitKw: 'kW', edPowerUnitW: 'W',
-    edTempUnit: '🌡 Enota temperature', edTempUnitC: '°C — Celzij', edTempUnitF: '°F — Fahrenheit',
-    edCoolAnimSpeed: '❄ Interval snežink (sekunde)', edCoolAnimSpeedDesc: 'Čas med pojavitvami snežink (2–15s)',
-    edShowOutdoorTemp: 'Zunanja temperatura', edShowHumidity: 'Vlažnost', edShowPower: 'Moč (kW)',
-    edRoomCountLabel: function(n) { return '🏠 Število prostorov (1–8, privzeto 4)'; },
-    edRoomsHeader: function(n) { return '❄ Klimatske naprave (' + n + ' prostorov)'; },
-    edRooms: '❄ Klime',
-    edSensors: '📡 Senzorji okolja',
-    edColors: 'Barve',
-    edBg: 'Barva ozadja',
-    edBgAlpha: '🔆 Prozornost ozadja', edBgTransparent: 'Prozorno', edBgSolid: 'Polno',
-    edColorsAdvanced: '🎨 Napredne barve',
-    edColorsDefault: 'Prazno = privzeta barva. Uporabljeno v realnem času.',
-    edColorsReset: '↩ Ponastavi vse barve na privzeto',
-    edColorsSecHeader: '📌 Glava in Pozdrav',
-    edColorsDial: '🌡 Temperaturni krog',
-    edColorsModeCtrl: '⚡ Načini in Upravljanje',
-    edColorsStatusRoom: '🏠 Stanje in Zavihki',
-    edAcEntity: '❄ Entiteta klime (climate.*)',
-    edAcName: '🏷 Prikazano ime',
-    edAcIcon: '🎨 MDI ikona (npr: mdi:sofa)',
-    edAcImage: '🖼 Slika prostora (URL)',
-    edRoomTempEntity: '🌡 Senzor sobne temp. (če klima nima)',
-    edRoomHumidityEntity: '💧 Senzor sobne vlage (če klima nima)',
-    edRoomPowerEntity: '⚡ Senzor porabe prostora (sensor.*)',
-    edPm25: '🌫 Delci PM2.5',
-    edOutdoorTemp: '🌡 Zunanja temperatura',
-    edHumidity: '💧 Zunanja vlažnost',
-    edPower: '⚡ Skupna poraba (kW)',
-    rooms: ['Dnevna soba','Spalnica','Jedilnica','Pisarna'],
-    roomIcons: ['mdi:sofa','mdi:bed','mdi:silverware-fork-knife','mdi:briefcase'],
-  },
+  }
 };
 
-// ─── Background presets (y hệt Gate Card) ─────────────────────────────────────
+// ─── 背景预设 (保持不变) ─────────────────────────────────────────────────────
 const AC_BG_PRESETS = [
   { id: 'default', label: 'Default',  c1: '#001e2b', c2: '#12c6f3' },
   { id: 'night',   label: 'Night',    c1: '#0d0d1a', c2: '#1a0a3a' },
@@ -1381,13 +596,10 @@ const AC_BG_PRESETS = [
 ];
 
 function acPresetGradient(preset, c1, c2, bgAlpha) {
-  // bgAlpha: 0-100 (%), dùng để điều chỉnh độ trong suốt của nền
-  // Chuyển % → 2 giá trị hex alpha: start = alpha, end = alpha/3 (để tạo gradient fade)
   var alphaPct = (bgAlpha !== undefined && bgAlpha !== null) ? Math.max(0, Math.min(100, parseInt(bgAlpha))) : 80;
   var alphaHex = Math.round(alphaPct * 2.55).toString(16).padStart(2,'0');
   var alphaHex2 = Math.round(alphaPct * 2.55 / 3).toString(16).padStart(2,'0');
   if (preset === 'deep_neon') {
-    // deep_neon: áp dụng alpha bằng rgba overlay
     if (alphaPct < 100) {
       var a = (alphaPct / 100).toFixed(2);
       return 'linear-gradient(160deg, rgba(2,11,24,' + a + ') 0%, rgba(4,20,40,' + a + ') 30%, rgba(6,28,53,' + a + ') 60%, rgba(3,14,31,' + a + ') 100%)';
@@ -1400,16 +612,15 @@ function acPresetGradient(preset, c1, c2, bgAlpha) {
   return 'linear-gradient(135deg, ' + gc1 + alphaHex + ' 0%, ' + gc2 + alphaHex2 + ' 100%)';
 }
 
-// ─── Temperature color: 10°C=blue → 22°C=cyan → 26°C=green → 30°C=orange → 35°C=red ──
 function acTempColor(temp) {
   var t = Math.max(10, Math.min(35, temp));
   var stops = [
-    { t: 10,  r: 59,  g: 130, b: 246 }, // blue
-    { t: 18,  r: 34,  g: 211, b: 238 }, // cyan
-    { t: 24,  r: 52,  g: 211, b: 153 }, // green
-    { t: 28,  r: 251, g: 191, b: 36  }, // amber
-    { t: 31,  r: 249, g: 115, b: 22  }, // orange
-    { t: 35,  r: 239, g: 68,  b: 68  }, // red
+    { t: 10,  r: 59,  g: 130, b: 246 },
+    { t: 18,  r: 34,  g: 211, b: 238 },
+    { t: 24,  r: 52,  g: 211, b: 153 },
+    { t: 28,  r: 251, g: 191, b: 36  },
+    { t: 31,  r: 249, g: 115, b: 22  },
+    { t: 35,  r: 239, g: 68,  b: 68  },
   ];
   var lo = stops[0], hi = stops[stops.length - 1];
   for (var i = 0; i < stops.length - 1; i++) {
@@ -1423,7 +634,7 @@ function acTempColor(temp) {
 }
 
 const AC_DEFAULT_CONFIG = {
-  language: 'vi',
+  language: 'zh',  // 默认中文
   background_preset: 'default',
   bg_color1: '#001e2b',
   bg_color2: '#12c6f3',
@@ -1461,10 +672,6 @@ const AC_DEFAULT_CONFIG = {
   temp_unit: 'C',
 };
 
-// ─── Temperature unit helpers ─────────────────────────────────────────────────
-// haUnit: đơn vị HA entity thực sự trả về ('C' hoặc 'F')
-// tUnit:  đơn vị người dùng muốn hiển thị ('C' hoặc 'F')
-// Chỉ convert khi haUnit ≠ tUnit
 function acCtoF(c) { return c * 9/5 + 32; }
 function acFtoC(f) { return (f - 32) * 5/9; }
 function acFmtTemp(val, tUnit, haUnit) {
@@ -1477,7 +684,6 @@ function acFmtTemp(val, tUnit, haUnit) {
   return val.toFixed(1);
 }
 function acTempUnit(unit) { return unit === 'F' ? '°F' : '°C'; }
-// For set temperature display (integer steps)
 function acFmtSetTemp(val, tUnit, haUnit) {
   var hu = haUnit || 'C';
   if (isNaN(parseFloat(val))) return val;
@@ -1487,95 +693,74 @@ function acFmtSetTemp(val, tUnit, haUnit) {
   if (hu === 'F' && tUnit === 'C') return Math.round(acFtoC(val));
   return val;
 }
-// Tính giá trị gửi lên HA khi user nhấn +/- (luôn trả về đúng đơn vị HA)
-// step: bước nhảy theo đơn vị hiển thị (tUnit), convert về haUnit trước khi gửi
 function acTempStep(currentHaVal, step, tUnit, haUnit) {
   var hu = haUnit || 'C';
-  // Convert current HA value → display unit, add step, convert back → HA unit
-  if (hu === tUnit) {
-    // Cùng đơn vị: +1 thẳng
-    return currentHaVal + step;
-  }
+  if (hu === tUnit) return currentHaVal + step;
   if (hu === 'C' && tUnit === 'F') {
-    // HA °C, user xem °F: +1°F = +5/9°C, làm tròn 0.5°C
     var dispF = acCtoF(currentHaVal) + step;
-    return Math.round(acFtoC(dispF) * 2) / 2; // round to nearest 0.5°C
+    return Math.round(acFtoC(dispF) * 2) / 2;
   }
   if (hu === 'F' && tUnit === 'C') {
-    // HA °F, user xem °C: +1°C = +1.8°F, làm tròn 1°F
     var dispC = acFtoC(currentHaVal) + step;
     return Math.round(acCtoF(dispC));
   }
   return currentHaVal + step;
 }
-// Min set temp theo đơn vị HA
 function acMinTemp(haUnit) { return haUnit === 'F' ? 60 : 16; }
 function acMaxTemp(haUnit) { return haUnit === 'F' ? 95 : 30; }
 
-const ROOM_IMAGES = [
-  'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=85', // phòng khách
-  'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=85', // phòng ngủ
-  'https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=900&q=85',    // phòng ăn
-  'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=900&q=85', // văn phòng
-  'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=900&q=85', // phòng tắm
-  'https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?w=900&q=85', // phòng trẻ em
-  'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=900&q=85', // phòng gym
-  'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=900&q=85', // phòng kho/tiện ích
-];
-
 const ROOMS_DEFAULT = [
-  { id: 'climate.dieu_hoa_living',         label: 'Ph\xf2ng kh\xe1ch', area: '25 m\xb2', icon: 'mdi:sofa' },
-  { id: 'climate.bed_air_conditioning',     label: 'Ph\xf2ng ng\u1ee7',  area: '18 m\xb2', icon: 'mdi:bed' },
-  { id: 'climate.kitchen_air_conditioning', label: 'Ph\xf2ng \u0103n',   area: '20 m\xb2', icon: 'mdi:silverware-fork-knife' },
-  { id: 'climate.dieu_hoa_office',          label: 'V\u0103n ph\xf2ng',  area: '15 m\xb2', icon: 'mdi:briefcase' },
-  { id: 'climate.dieu_hoa_bathroom',        label: 'Ph\xf2ng t\u1eafm',  area: '8 m\xb2',  icon: 'mdi:shower' },
-  { id: 'climate.dieu_hoa_kids',            label: 'Ph\xf2ng tr\u1ebb',  area: '14 m\xb2', icon: 'mdi:teddy-bear' },
-  { id: 'climate.dieu_hoa_gym',             label: 'Ph\xf2ng gym',       area: '20 m\xb2', icon: 'mdi:dumbbell' },
-  { id: 'climate.dieu_hoa_utility',         label: 'Kho',                area: '10 m\xb2', icon: 'mdi:archive' },
+  { id: 'climate.dieu_hoa_living',         label: '客厅', area: '25 m²', icon: 'mdi:sofa' },
+  { id: 'climate.bed_air_conditioning',     label: '卧室',  area: '18 m²', icon: 'mdi:bed' },
+  { id: 'climate.kitchen_air_conditioning', label: '餐厅',   area: '20 m²', icon: 'mdi:silverware-fork-knife' },
+  { id: 'climate.dieu_hoa_office',          label: '书房',   area: '15 m²', icon: 'mdi:briefcase' },
+  { id: 'climate.dieu_hoa_bathroom',        label: '浴室',  area: '8 m²',  icon: 'mdi:shower' },
+  { id: 'climate.dieu_hoa_kids',            label: '儿童房', area: '14 m²', icon: 'mdi:teddy-bear' },
+  { id: 'climate.dieu_hoa_gym',             label: '健身房', area: '20 m²', icon: 'mdi:dumbbell' },
+  { id: 'climate.dieu_hoa_utility',         label: '储藏室', area: '10 m²', icon: 'mdi:archive' },
 ];
 var ROOMS = ROOMS_DEFAULT.slice(0, 4);
 
 const GREET = function() {
   var h = new Date().getHours();
-  if (h >= 6  && h < 11) return 'Ch\xe0o bu\u1ed5i s\xe1ng,';   // 06–10
-  if (h >= 11 && h < 13) return 'Ch\xe0o bu\u1ed5i tr\u01b0a,';  // 11–12
-  if (h >= 13 && h < 18) return 'Ch\xe0o bu\u1ed5i chi\u1ec1u,'; // 13–17
-  if (h >= 18 && h < 21) return 'Ch\xe0o bu\u1ed5i t\u1ed1i,';   // 18–20
-  return 'Ch\xfac ng\u1ee7 ngon,';                               // 21–05
+  if (h >= 6  && h < 11) return '早上好';
+  if (h >= 11 && h < 13) return '中午好';
+  if (h >= 13 && h < 18) return '下午好';
+  if (h >= 18 && h < 21) return '晚上好';
+  return '晚安';
 };
 
 const MODE_CFG = {
-  cool:     { lbl: 'L\xe0m l\u1ea1nh', icon: 'mdi:snowflake',      color: '#3b9eff', glow: 'rgba(59,158,255,0.55)'   },
-  heat:     { lbl: 'S\u01b0\u1edfi',   icon: '\ud83d\udd25', color: '#ff7b3b', glow: 'rgba(255,123,59,0.55)'  },
-  dry:      { lbl: 'H\xfat \u1ea9m',   icon: '\ud83d\udca7', color: '#a78bfa', glow: 'rgba(167,139,250,0.55)' },
-  fan_only: { lbl: 'Qu\u1ea1t',        icon: '\ud83c\udf2c', color: '#34d399', glow: 'rgba(52,211,153,0.55)'  },
-  auto:     { lbl: 'T\u1ef1 \u0111\u1ed9ng', icon: 'mdi:autorenew', color: '#f59e0b', glow: 'rgba(245,158,11,0.55)' },
-  off:      { lbl: 'T\u1eaft',         icon: '\u25cb',       color: '#4b5563', glow: 'rgba(75,85,99,0.3)'     },
+  cool:     { lbl: '制冷', icon: 'mdi:snowflake',      color: '#3b9eff', glow: 'rgba(59,158,255,0.55)'   },
+  heat:     { lbl: '制热', icon: '🔥', color: '#ff7b3b', glow: 'rgba(255,123,59,0.55)'  },
+  dry:      { lbl: '除湿', icon: '💧', color: '#a78bfa', glow: 'rgba(167,139,250,0.55)' },
+  fan_only: { lbl: '送风', icon: '🌀', color: '#34d399', glow: 'rgba(52,211,153,0.55)'  },
+  auto:     { lbl: '自动', icon: 'mdi:autorenew', color: '#f59e0b', glow: 'rgba(245,158,11,0.55)' },
+  off:      { lbl: '关闭', icon: '○', color: '#4b5563', glow: 'rgba(75,85,99,0.3)'     },
 };
 
 const FAN_LEVELS  = ['auto','min','low','low_mid','medium','high_mid','high','max','low/auto','high/auto','quiet'];
-const FAN_VI      = ['Tự động','Min','Thấp','Thấp-Vừa','Vừa','Vừa-Cao','Cao','Max','Thấp/Tự động','Cao/Tự động','Êm ái'];
+const FAN_VI      = ['自动','最低','低','中低','中','中高','高','最高','低/自动','高/自动','静音'];
 const SWING_LEVELS = ['off','vertical','horizontal','both'];
-const SWING_VI    = ['C\u1ed1 \u0111\u1ecbnh','L\u00ean xu\u1ed1ng','Tr\xe1i ph\u1ea3i','T\u1ea5t c\u1ea3'];
-const SWING_ICONS  = ['\u2014','\u2195','\u2194','\u2716'];
+const SWING_VI    = ['固定','上下','左右','摆风'];
+const SWING_ICONS  = ['—','↕','↔','✖'];
 const SWING_NUMERIC = ['1','2','3','4','5','6'];
-// Comfort text by temperature range (every 4°C from 16–32)
-// 16-19: lạnh buốt, 20-23: dễ chịu, 24-27: ấm áp, 28-31: nóng, 32+: rất nóng
+
 function getTempComfort(temp) {
   var t = Math.round(temp);
-  if (t <= 19) return 'L\u1ea1nh bu\u1ed1t, m\u1eb7c th\xeam \xe1o nh\xe9!';
-  if (t <= 23) return 'Nhi\u1ec7t \u0111\u1ed9 l\xfd t\u01b0\u1edfng, th\u01b0 gi\xe3n th\xf4i';
-  if (t <= 27) return 'C\u1ea3m gi\xe1c d\u1ec5 ch\u1ecbu, tho\u1ea3i m\xe1i';
-  if (t <= 31) return 'H\u01a1i \u1ea5m, c\xe2n l\xe0m m\xe1t th\xeam';
-  return 'Qu\xe1 n\xf3ng! H\xe3y \u0111i\u1ec1u ch\u1ec9nh nhi\u1ec7t \u0111\u1ed9';
+  if (t <= 19) return '有点冷，加件衣服';
+  if (t <= 23) return '温度舒适';
+  if (t <= 27) return '温度宜人';
+  if (t <= 31) return '有点热，开空调吧';
+  return '太热了！快开空调';
 }
 
-const COMFORT    = {
+const COMFORT = {
   cool:     '',
   heat:     '',
-  dry:      'Kh\xf4ng kh\xed kh\xf4 r\xe1o',
-  fan_only: 'Gi\xf3 nh\u1eb9 m\xe1t m\u1ebb',
-  off:      '\u0110ang t\u1eaft',
+  dry:      '空气干燥舒适',
+  fan_only: '微风清爽',
+  off:      '已关闭',
 };
 
 // ─── CSS tách riêng – chỉ inject 1 lần ───────────────────────────────────────
